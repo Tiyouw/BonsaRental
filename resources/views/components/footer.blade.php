@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
                 <div class="flex items-center mb-4">
-                    <img src="{{ asset('images/logo/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
+                    <img src="{{ asset('images/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
                 </div>
                 <p class="text-sm">Penyedia jasa sewa perlengkapan fotografi terpercaya untuk kebutuhan profesional maupun hobi Anda.</p>
             </div>
@@ -12,7 +12,7 @@
                 <h5 class="text-lg mb-3">Menu</h5>
                 <ul class="space-y-2">
                     <li><a href="{{ route('landing') }}" class="text-white hover:text-light">Beranda</a></li>
-                    <li><a href="{{ route('landing') }}" class="text-white hover:text-light">Katalog</a></li>
+                    <li><a href="{{ route('landing') }}" class="text-white hover:text-light">Pengelolaan</a></li>
                     <li><a href="{{ route('landing') }}" class="text-white hover:text-light">Tentang Kami</a></li>
                     <li><a href="{{ route('landing') }}" class="text-white hover:text-light">Kontak</a></li>
                 </ul>

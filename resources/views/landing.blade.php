@@ -9,7 +9,7 @@
         <div>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
             <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
-            <a href="#" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">KATALOG</a>
+            <a href="{{ route('login') }}" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">Masuk Sekarang!</a>
             <div class="mt-12">
                 <div class="flex items-center">
                     <div class="mr-4">

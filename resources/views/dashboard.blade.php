@@ -18,7 +18,7 @@
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span>Katalog</span>
+                <span>Pengelolaan</span>
             </a>
             <a href="#" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -46,12 +46,10 @@
                 </div>
                 <div class="flex items-center mt-4 md:mt-0">
                     <button class="mr-4 p-2 border rounded-md">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
                     </button>
                     <div class="flex items-center">
-                        <img src="https://i.pravatar.cc/150?img=12" alt="Profile" class="w-10 h-10 rounded-full">
+                        <img src="images/comot.png" alt="Profile" class="w-10 h-10 rounded-full">
                         <div class="ml-3">
                             <h6 class="font-medium">{{ $username }}</h6>
                             <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +70,7 @@
                             <a href="#" class="inline-block bg-white text-primary hover:bg-light px-4 py-2 rounded-md">Cek sekarang</a>
                         </div>
                         <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="https://png.pngtree.com/png-clipart/20220718/ourmid/pngtree-camera-lens-transparent-background-png-image_6022299.png" alt="Camera Lens" class="h-32 object-contain">
+                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
                         </div>
                     </div>
                 </div>
@@ -84,7 +82,7 @@
                             <a href="#" class="inline-block bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 rounded-md">Cek sekarang</a>
                         </div>
                         <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="https://png.pngtree.com/png-clipart/20220718/ourmid/pngtree-camera-lens-transparent-background-png-image_6022299.png" alt="Camera Lens" class="h-32 object-contain">
+                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
                         </div>
                     </div>
                 </div>

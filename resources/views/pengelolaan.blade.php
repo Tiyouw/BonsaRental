@@ -18,7 +18,7 @@
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
-                <span>Katalog</span>
+                <span>Pengelolaan</span>
             </a>
             <a href="#" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -106,13 +106,13 @@
                                 <td class="px-4 py-3">{{ $item['id'] }}</td>
                                 <td class="px-4 py-3">
                                     @if($item['kategori'] == 'Kamera')
-                                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
+                                        <img src="{{ asset($item['gambar']) }}" alt="{{ $item['nama'] }}" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
                                     @elseif($item['kategori'] == 'Lensa')
-                                        <img src="https://images.unsplash.com/photo-1617005082093-35fd167579d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
+                                        <img src="{{ asset($item['gambar']) }}" alt="{{ $item['nama'] }}" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
                                     @elseif($item['kategori'] == 'Lighting')
-                                        <img src="https://images.unsplash.com/photo-1615973569393-c3ccc206cc0d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
+                                        <img src="{{ asset($item['gambar']) }}" alt="{{ $item['nama'] }}" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
                                     @else
-                                        <img src="https://images.unsplash.com/photo-1584135624688-5d2a4960d13a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&q=80" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
+                                        <img src="{{ asset($item['gambar']) }}" alt="{{ $item['nama'] }}" alt="{{ $item['nama'] }}" class="w-14 h-14 object-cover rounded">
                                     @endif
                                 </td>
                                 <td class="px-4 py-3">{{ $item['nama'] }}</td>
