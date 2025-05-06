@@ -1,54 +1,87 @@
-@php
-    $username = request()->query('username');
-    $password = request()->query('password');
-@endphp
+<nav class="fixed top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-md border-b border-white/10 shadow-lg">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <!-- Logo -->
+            <a href="{{ route('landing') }}" class="flex items-center">
+                <img src="{{ asset('images/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
+                <span class="ml-2 text-white font-bold text-xl"></span>
+            </a>
 
-<header x-data="{ open: false, userOpen: false }" class="bg-purple-600 fixed w-full px-8 py-4 flex justify-between items-center text-white z-50">
-    <div>
-        <a href="{{ route('landing') }}">
-            <span class="text-2xl font-bold">BonsaRental</span>
-        </a>
-    </div>
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button type="button" class="text-white hover:text-light focus:outline-none" id="mobile-menu-button">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
 
-    <nav class="hidden md:flex gap-6 text-lg font-semibold items-center">
-        <a href="{{ route('dashboard', ['username' => $username, 'password' => $password]) }}" class="hover:underline transition">Dashboard</a>
-        <a href="{{ route('pengelolaan', ['username' => $username, 'password' => $password]) }}" class="hover:underline transition">Katalog</a>
-    </nav>
-
-    <div class="flex items-center gap-4">
-        <button @click="open = !open" class="block md:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path x-show="!open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                <path x-show="open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-
-        @if($username)
-        <div class="relative">
-            <button @click="userOpen = !userOpen" id="dropdownButton" class="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2ZM6.02332 15.4163C7.49083 17.6069 9.69511 19 12.1597 19C14.6243 19 16.8286 17.6069 18.2961 15.4163C16.6885 13.9172 14.5312 13 12.1597 13C9.78821 13 7.63095 13.9172 6.02332 15.4163ZM12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z" />
-                </svg>
-                <span class="text-lg font-semibold hidden sm:block">Hello, {{ $username }}!</span>
-                <svg id="dropdownIcon" class="w-5 h-5 ml-1 transition-transform duration-200" :class="{ 'rotate-180': userOpen }" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-            </button>
-            <div x-show="userOpen" @click.outside="userOpen = false" class="absolute right-0 mt-2 w-40 p-3 rounded-lg bg-white text-purple-600 shadow-lg z-50">
-                <a href="{{ route('profile', ['username' => $username, 'password' => $password]) }}" class="block px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white">Profile</a>
-                <a href="{{ route('landing') }}" class="block px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white">Logout</a>
+            <!-- Desktop menu -->
+            <div class="hidden md:flex md:items-center">
+                @if(request()->routeIs('landing'))
+                    <div class="relative group">
+                        <button class="flex items-center text-white hover:text-light px-3 py-2">
+                            <span>Katalog</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white/70 backdrop-blur-md rounded-md shadow-lg hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20 rounded-t-md">Kamera</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20">Lensa</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20">Lighting</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20 rounded-b-md">Aksesoris</a>
+                        </div>
+                    </div>
+                    <a href="{{ route('login') }}" class="text-white hover:text-light px-3 py-2 mx-2">Masuk</a>
+                    <a href="#" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
+                @else
+                    <div class="relative group">
+                        <button class="flex items-center text-white hover:text-light px-3 py-2">
+                            <span>Katalog</span>
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white/70 backdrop-blur-md rounded-md shadow-lg hidden group-hover:block">
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20 rounded-t-md">Kamera</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20">Lensa</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20">Lighting</a>
+                            <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-primary/20 rounded-b-md">Aksesoris</a>
+                        </div>
+                    </div>
+                    <a href="{{ route('dashboard') }}" class="text-white hover:text-light px-3 py-2 mx-2">Dashboard</a>
+                    <a href="{{ route('pengelolaan') }}" class="text-white hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
+                    <a href="{{ route('profile') }}" class="text-white hover:text-light px-3 py-2 mx-2">Profil</a>
+                @endif
             </div>
         </div>
-        @else
-        <div class="flex space-x-4">
-            <a href="{{ route('login') }}" class="rounded-lg bg-white text-purple-600 px-4 py-1 font-medium">Login</a>
-        </div>
-        @endif
     </div>
 
-    <div x-show="open" @click.outside="open = false"
-        class="md:hidden absolute top-full left-0 w-full bg-purple-600 text-white shadow-md z-40">
-        <a href="{{ route('dashboard', ['username' => $username, 'password' => $password]) }}" class="block px-6 py-3 border-t border-purple-700 hover:bg-purple-700">Dashboard</a>
-        <a href="{{ route('pengelolaan', ['username' => $username, 'password' => $password]) }}" class="block px-6 py-3 border-t border-purple-700 hover:bg-purple-700">Katalog</a>
+    <!-- Mobile menu -->
+    <div class="hidden md:hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 bg-primary/90 backdrop-blur-md">
+            <div class="px-3 py-2 text-white font-medium">Katalog</div>
+            <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Kamera</a>
+            <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Lensa</a>
+            <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Lighting</a>
+            <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Aksesoris</a>
+
+            @if(request()->routeIs('landing'))
+                <a href="{{ route('login') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Masuk</a>
+                <a href="#" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
+            @else
+                <a href="{{ route('dashboard') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
+                <a href="{{ route('pengelolaan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
+                <a href="{{ route('profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
+            @endif
+        </div>
     </div>
-</header>
+</nav>
+
+<script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+</script>

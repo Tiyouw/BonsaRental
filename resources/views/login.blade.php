@@ -1,64 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ asset('assets/logo.png') }}" type="image/png">
-    <title>Login - BonsaRental</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="font-sans bg-gray-100">
-    <div class="min-h-screen flex">
-        <div class="hidden md:block w-1/2 bg-cover bg-center" style="background-image: url('{{ asset('assets/camera-bg.jpg') }}')">
-        </div>
-        <div class="w-full md:w-1/2 flex items-center justify-center p-8">
-            <div class="max-w-md w-full">
-                <div class="text-center mb-10">
-                    <h1 class="text-3xl font-bold text-purple-600">BonsaRental</h1>
-                    <p class="text-gray-500 mt-2">Login to your account</p>
-                </div>
+<!-- resources/views/login.blade.php -->
+@extends('layouts.app')
 
-                <div class="bg-white rounded-lg p-8 shadow-md">
-                    <form action="{{ route('login.submit') }}" method="POST" class="space-y-6">
-                        @csrf
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Username</label>
-                            <input type="text" name="username" placeholder="Enter your username" required
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        </div>
-                        <div>
-                            <label class="block text-gray-700 font-medium mb-2">Password</label>
-                            <input type="password" name="password" placeholder="Enter your password" required
-                                   class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                        </div>
+@section('title', 'Login - BonsaRental')
 
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center">
-                                <input type="checkbox" id="remember" class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
-                                <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
-                            </div>
-                            <a href="#" class="text-sm text-purple-600 hover:underline">Forgot password?</a>
-                        </div>
-
-                        <button type="submit" class="w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition">
-                            Sign In
-                        </button>
-                    </form>
-
-                    <div class="mt-6 text-center">
-                        <p class="text-sm text-gray-600">
-                            Don't have an account?
-                            <a href="#" class="text-purple-600 font-medium hover:underline">Sign up</a>
-                        </p>
+@section('content')
+<div class="flex flex-col lg:flex-row min-h-screen">
+    <div class="w-full lg:w-1/2 bg-primary p-8 lg:p-16 flex items-center">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
+            <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
+            <a href="#" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">KATALOG</a>
+            <div class="mt-12">
+                <div class="flex items-center">
+                    <div class="mr-4">
+                        <span class="text-white font-bold">01</span>
                     </div>
-                </div>
-
-                <div class="text-center mt-8 text-gray-500 text-sm">
-                    &copy; BonsaRental 2025. All rights reserved.
+                    <div class="w-full h-0.5 bg-white/30 relative">
+                        <div class="absolute left-0 top-0 w-1/4 h-0.5 bg-white"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold mb-2">bonsarental</h3>
+                <h2 class="text-3xl font-semibold">Masuk</h2>
+            </div>
+            <form method="POST" action="{{ route('login.submit') }}">
+                @csrf
+                <div class="mb-6">
+                    <label for="username" class="block text-gray-700 mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-gray-700 mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
+                </div>
+                <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-md hover:bg-secondary transition-colors">Masuk</button>
+            </form>
+            <p class="text-center mt-6">New to BonsaRental? <a href="#" class="text-primary hover:underline">Daftar</a></p>
+        </div>
+    </div>
+</div>
+@endsection

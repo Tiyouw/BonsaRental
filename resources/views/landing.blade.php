@@ -1,81 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ asset('assets/logo.png') }}" type="image/png">
-    <title>BonsaRental - Camera & Lens Rental</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5+RrF0Ky8rW2XvYoE6iOr3YoD1p5Rf4mMHbh4vW4lJhJmD2a5XWm4GR8+2o4w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+<!-- resources/views/landing.blade.php -->
+@extends('layouts.app')
 
-<body>
-    <header class="bg-purple-600 fixed px-10 py-6 flex justify-between items-center w-full z-50">
-        <span class="text-2xl font-bold text-white">BonsaRental</span>
-        <div class="flex space-x-4">
-            <a href="{{ route('login') }}" class="rounded-lg bg-white text-purple-600 px-6 py-1 hover:bg-opacity-90 transition font-medium">
-                Login
-            </a>
-            <a href="#" class="rounded-lg border-2 border-white text-white px-6 py-1 hover:bg-white hover:text-purple-600 transition font-medium">
-                Register
-            </a>
-        </div>
-    </header>
+@section('title', 'BonsaRental - Sewa Perlengkapan Fotografi')
 
-    <div class="bg-gray-100 pt-24 min-h-screen">
-        <!-- Hero Section -->
-        <div class="w-full h-[500px] relative overflow-hidden">
-            <img src="{{ asset('assets/hero.jpg') }}" alt="Camera Equipment" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white px-4">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Sewa perlengkapan fotografi dengan mudah</h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-3xl text-center">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
-                <a href="{{ route('login') }}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-lg transition">
-                    Lihat Katalog
-                </a>
-            </div>
-        </div>
-
-        <!-- Features Section -->
-        <div class="max-w-7xl mx-auto py-16 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-camera text-3xl text-purple-600"></i>
+@section('content')
+<div class="flex flex-col lg:flex-row">
+    <div class="w-full lg:w-1/2 bg-primary p-8 lg:p-16 flex items-center" style="min-height: 500px;">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
+            <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
+            <a href="#" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">KATALOG</a>
+            <div class="mt-12">
+                <div class="flex items-center">
+                    <div class="mr-4">
+                        <span class="text-white font-bold">01</span>
+                    </div>
+                    <div class="w-full h-0.5 bg-white/30 relative">
+                        <div class="absolute left-0 top-0 w-1/4 h-0.5 bg-white"></div>
+                    </div>
                 </div>
-                <h3 class="text-xl font-bold mb-2">Peralatan Berkualitas</h3>
-                <p class="text-gray-600">Semua peralatan kami dijaga dengan baik untuk memastikan kualitas terbaik.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-tag text-3xl text-purple-600"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Harga Terjangkau</h3>
-                <p class="text-gray-600">Kami menawarkan harga yang kompetitif untuk memenuhi kebutuhan anda.</p>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg shadow-md text-center">
-                <div class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-headset text-3xl text-purple-600"></i>
-                </div>
-                <h3 class="text-xl font-bold mb-2">Dukungan 24/7</h3>
-                <p class="text-gray-600">Tim kami siap membantu anda kapanpun anda membutuhkan bantuan.</p>
             </div>
         </div>
     </div>
+    <div class="w-full lg:w-1/2">
+        <img src="https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80" alt="Camera" class="w-full h-full object-cover" style="max-height: 500px;">
+    </div>
+</div>
 
-    @include('components.footer')
+<div class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-center mb-12">Kategori Perlengkapan</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1964&q=80" alt="Kamera" class="w-full h-48 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-semibold mb-2">Kamera</h3>
+                <p class="text-gray-600 mb-4">Berbagai pilihan kamera DSLR dan mirrorless untuk kebutuhan fotografi Anda.</p>
+                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1552830710-b3ad75beca12?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lensa" class="w-full h-48 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-semibold mb-2">Lensa</h3>
+                <p class="text-gray-600 mb-4">Lensa berkualitas tinggi untuk berbagai jenis kebutuhan fotografi.</p>
+                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1745848038063-bbb6fc8c8867?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Lighting" class="w-full h-48 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-semibold mb-2">Lighting</h3>
+                <p class="text-gray-600 mb-4">Peralatan lighting untuk menghasilkan foto dengan pencahayaan sempurna.</p>
+                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1593935308260-d47509d56370?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGFjY2Vzc29yaWVzJTIwY2FtZXJhfGVufDB8fDB8fHww" alt="Aksesoris" class="w-full h-48 object-cover">
+            <div class="p-6 text-center">
+                <h3 class="text-xl font-semibold mb-2">Aksesoris</h3>
+                <p class="text-gray-600 mb-4">Berbagai aksesoris pendukung untuk melengkapi kebutuhan fotografi Anda.</p>
+                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/6281234567890" target="_blank"
-        class="fixed bottom-4 right-4 flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 z-50">
-        <svg class="w-5 h-5 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M7.25361 18.4944L7.97834 18.917C9.18909 19.623 10.5651 20 12.001 20C16.4193 20 20.001 16.4183 20.001 12C20.001 7.58172 16.4193 4 12.001 4C7.5827 4 4.00098 7.58172 4.00098 12C4.00098 13.4363 4.37821 14.8128 5.08466 16.0238L5.50704 16.7478L4.85355 19.1494L7.25361 18.4944ZM2.00516 22L3.35712 17.0315C2.49494 15.5536 2.00098 13.8345 2.00098 12C2.00098 6.47715 6.47813 2 12.001 2C17.5238 2 22.001 6.47715 22.001 12C22.001 17.5228 17.5238 22 12.001 22C10.1671 22 8.44851 21.5064 6.97086 20.6447L2.00516 22ZM8.39232 7.30833C8.5262 7.29892 8.66053 7.29748 8.79459 7.30402C8.84875 7.30758 8.90265 7.31384 8.95659 7.32007C9.11585 7.33846 9.29098 7.43545 9.34986 7.56894C9.64818 8.24536 9.93764 8.92565 10.2182 9.60963C10.2801 9.76062 10.2428 9.95633 10.125 10.1457C10.0652 10.2428 9.97128 10.379 9.86248 10.5183C9.74939 10.663 9.50599 10.9291 9.50599 10.9291C9.50599 10.9291 9.40738 11.0473 9.44455 11.1944C9.45903 11.25 9.50521 11.331 9.54708 11.3991C9.57027 11.4368 9.5918 11.4705 9.60577 11.4938C9.86169 11.9211 10.2057 12.3543 10.6259 12.7616C10.7463 12.8783 10.8631 12.9974 10.9887 13.108C11.457 13.5209 11.9868 13.8583 12.559 14.1082L12.5641 14.1105C12.6486 14.1469 12.692 14.1668 12.8157 14.2193C12.8781 14.2457 12.9419 14.2685 13.0074 14.2858C13.0311 14.292 13.0554 14.2955 13.0798 14.2972C13.2415 14.3069 13.335 14.2032 13.3749 14.1555C14.0984 13.279 14.1646 13.2218 14.1696 13.2222V13.2238C14.2647 13.1236 14.4142 13.0888 14.5476 13.097C14.6085 13.1007 14.6691 13.1124 14.7245 13.1377C15.2563 13.3803 16.1258 13.7587 16.1258 13.7587L16.7073 14.0201C16.8047 14.0671 16.8936 14.1778 16.8979 14.2854C16.9005 14.3523 16.9077 14.4603 16.8838 14.6579C16.8525 14.9166 16.7738 15.2281 16.6956 15.3913C16.6406 15.5058 16.5694 15.6074 16.4866 15.6934C16.3743 15.81 16.2909 15.8808 16.1559 15.9814C16.0737 16.0426 16.0311 16.0714 16.0311 16.0714C15.8922 16.159 15.8139 16.2028 15.6484 16.2909C15.391 16.428 15.1066 16.5068 14.8153 16.5218C14.6296 16.5313 14.4444 16.5447 14.2589 16.5347C14.2507 16.5342 13.6907 16.4482 13.6907 16.4482C12.2688 16.0742 10.9538 15.3736 9.85034 14.402C9.62473 14.2034 9.4155 13.9885 9.20194 13.7759C8.31288 12.8908 7.63982 11.9364 7.23169 11.0336C7.03043 10.5884 6.90299 10.1116 6.90098 9.62098C6.89729 9.01405 7.09599 8.4232 7.46569 7.94186C7.53857 7.84697 7.60774 7.74855 7.72709 7.63586C7.85348 7.51651 7.93392 7.45244 8.02057 7.40811C8.13607 7.34902 8.26293 7.31742 8.39232 7.30833Z">
-            </path>
-        </svg>
-        <span>Chat with us</span>
-    </a>
-</body>
-</html>
+<div class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Mengapa Memilih BonsaRental?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Peralatan Berkualitas</h3>
+                <p class="text-gray-600">Semua peralatan kami terjamin kualitasnya dan selalu dalam kondisi prima.</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Harga Terjangkau</h3>
+                <p class="text-gray-600">Dapatkan peralatan fotografi berkualitas dengan harga yang bersahabat.</p>
+            </div>
+            <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                <div class="flex justify-center mb-4">
+                    <svg class="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Layanan 24/7</h3>
+                <p class="text-gray-600">Tim dukungan kami siap membantu Anda kapan saja dan di mana saja.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ asset('assets/logo.png') }}" type="image/png">
-    <title>@yield('title', 'Bonsa Rental')</title>
-    <script src="//unpkg.com/alpinejs" defer></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-KyZXEAg3QhqLMpG8r+Knujsl5+RrF0Ky8rW2XvYoE6iOr3YoD1p5Rf4mMHbh4vW4lJhJmD2a5XWm4GR8+2o4w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>@yield('title', 'BonsaRental - Sewa Perlengkapan Fotografi')</title>
+    @vite('resources/css/app.css')
+    <style>
+        @layer utilities {
+            .content-area {
+                min-height: calc(100vh - 64px);
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <x-navbar></x-navbar>
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-gray-50 to-light">
+    <!-- Navbar Component -->
+    <x-navbar />
 
-    <main class="container mx-auto py-4 px-4">
+    <!-- Main Content -->
+    <div class="flex-1 pt-16">
         @yield('content')
-    </main>
+    </div>
 
-    <x-footer></x-footer>
+    <!-- Footer Component -->
+    <x-footer />
+
+    @yield('scripts')
 </body>
 </html>

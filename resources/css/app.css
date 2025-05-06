@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .glassmorphism {
+    @apply bg-primary/30 backdrop-blur-md border-b border-white/10 shadow-lg;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition-colors;
+  }
+}
