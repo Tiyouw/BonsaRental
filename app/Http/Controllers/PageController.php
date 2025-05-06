@@ -6,13 +6,11 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    // For the landing page
     public function landing()
     {
         return view('landing');
     }
 
-    // For the login page
     public function login()
     {
         return view('login');
@@ -24,12 +22,10 @@ class PageController extends Controller
         return redirect()->route('dashboard', compact('username'));
     }
 
-    // For the dashboard page
     public function dashboard(Request $request)
     {
         $username = $request->query('username', 'Pengguna');
 
-        // Sample rental history data for the dashboard
         $rentalHistory = [
             [
                 'tanggal' => '30 April',
@@ -64,7 +60,6 @@ class PageController extends Controller
         return view('dashboard', compact('username', 'rentalHistory'));
     }
 
-    // For the profile page
     public function profile(Request $request)
     {
         $username = $request->query('username');
@@ -72,11 +67,9 @@ class PageController extends Controller
         return view('profile', ['username' => $username]);
     }
 
-    // For the pengelolaan page
     public function pengelolaan(Request $request)
     {
         $username = $request->query('username', 'Pengguna');
-        // Sample catalog data
         $catalogItems = [
             [
                 'id' => 1,
