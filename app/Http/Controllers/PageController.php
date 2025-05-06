@@ -18,6 +18,12 @@ class PageController extends Controller
         return view('login');
     }
 
+    public function submit(Request $request)
+    {
+        $username = $request->input('username');
+        return redirect()->route('dashboard', compact('username'));
+    }
+
     // For the dashboard page
     public function dashboard(Request $request)
     {
@@ -61,14 +67,15 @@ class PageController extends Controller
     // For the profile page
     public function profile(Request $request)
     {
-        $username = $request->query('username', 'Pengguna');
+        $username = $request->query('username');
 
-        return view('profile', compact('username'));
+        return view('profile', ['username' => $username]);
     }
 
     // For the pengelolaan page
-    public function pengelolaan()
+    public function pengelolaan(Request $request)
     {
+        $username = $request->query('username', 'Pengguna');
         // Sample catalog data
         $catalogItems = [
             [
@@ -118,6 +125,6 @@ class PageController extends Controller
             ],
         ];
 
-        return view('pengelolaan', compact('catalogItems'));
+        return view('pengelolaan', compact('username','catalogItems'));
     }
 }

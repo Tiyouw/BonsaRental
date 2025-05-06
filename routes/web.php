@@ -14,21 +14,9 @@ use App\Http\Controllers\PageController;
 |
 */
 
-// Landing page
 Route::get('/', [PageController::class, 'landing'])->name('landing');
-
-// Login
 Route::get('/login', [PageController::class, 'login'])->name('login');
-Route::post('/login', function(\Illuminate\Http\Request $request) {
-    $username = $request->input('username');
-    return redirect()->route('dashboard', ['username' => $username]);
-})->name('login.submit');
-
-// Dashboard
+Route::post('/login', [PageController::class, 'submit'])->name('login.submit');
 Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-
-// Profile
 Route::get('/profile', [PageController::class, 'profile'])->name('profile');
-
-// Pengelolaan
 Route::get('/pengelolaan', [PageController::class, 'pengelolaan'])->name('pengelolaan');

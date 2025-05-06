@@ -1,20 +1,18 @@
-<!-- resources/views/profile.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Profile - BonsaRental')
 
 @section('content')
 <div class="flex">
-    <!-- Sidebar -->
     <div class="hidden md:block w-64 bg-dark min-h-screen fixed">
         <div class="flex flex-col">
-            <a href="{{ route('dashboard') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
+            <a href="{{ route('dashboard', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
                 <span>Dashboard</span>
             </a>
-            <a href="{{ route('pengelolaan') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
+            <a href="{{ route('pengelolaan', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
                 </svg>
@@ -26,7 +24,7 @@
                 </svg>
                 <span>Riwayat</span>
             </a>
-            <a href="{{ route('profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
+            <a href="{{ route('profile', ['username' => $username]) }}" class="flex items-center text-white bg-primary px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -35,20 +33,17 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="w-full md:ml-64 px-4 py-8">
         <div class="container mx-auto">
-            <!-- Header -->
             <div class="mb-8">
                 <h1 class="text-2xl font-bold">Profil Pengguna</h1>
                 <p class="text-gray-600">Kelola informasi akun Anda</p>
             </div>
 
-            <!-- Profile Card -->
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="text-center mb-8">
                     <img src="images/comot.png" alt="Profile" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <h2 class="text-2xl font-semibold">Selamat datang, {{ $username }}!</h2>
+                    <p class="text-2xl font-semibold">Selamat datang, <span class="text-primary">{{ $username }}</span>!</p>
                     <p class="text-gray-600">Member sejak Januari 2024</p>
                 </div>
 
@@ -75,7 +70,6 @@
                 </div>
             </div>
 
-            <!-- Recent Activity -->
             <div class="bg-white rounded-lg shadow-md p-6 mt-8">
                 <h3 class="text-xl font-semibold mb-6">Aktivitas Terbaru</h3>
                 <div class="space-y-4">

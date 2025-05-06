@@ -1,4 +1,3 @@
-<!-- resources/views/login.blade.php -->
 @extends('layouts.app')
 
 @section('title', 'Login - BonsaRental')

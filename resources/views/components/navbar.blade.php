@@ -1,12 +1,10 @@
 <nav class="fixed top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-md border-b border-white/10 shadow-lg">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
             <a href="{{ route('landing') }}" class="flex items-center">
                 <img src="{{ asset('images/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
             </a>
 
-            <!-- Mobile menu button -->
             <div class="md:hidden">
                 <button type="button" class="text-black hover:text-light focus:outline-none" id="mobile-menu-button">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -15,7 +13,6 @@
                 </button>
             </div>
 
-            <!-- Desktop menu -->
             <div class="hidden md:flex md:items-center">
                 @if(request()->routeIs('landing'))
                     <div class="relative group">
@@ -23,15 +20,14 @@
                         <a href="#" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
                     </div>
                 @else
-                    <a href="{{ route('dashboard') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
-                    <a href="{{ route('pengelolaan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
-                    <a href="{{ route('profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
+                    <a href="{{ route('dashboard', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
+                    <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
+                    <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                 @endif
             </div>
         </div>
     </div>
 
-    <!-- Mobile menu -->
     <div class="hidden md:hidden" id="mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 bg-primary/90 backdrop-blur-md">
             <div class="px-3 py-2 text-white font-medium">Katalog</div>
@@ -44,9 +40,9 @@
                 <a href="{{ route('login') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Masuk</a>
                 <a href="#" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
             @else
-                <a href="{{ route('dashboard') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
-                <a href="{{ route('pengelolaan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
-                <a href="{{ route('profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
+                <a href="{{ route('dashboard', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
+                <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
+                <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
             @endif
         </div>
     </div>
