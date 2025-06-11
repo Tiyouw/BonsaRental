@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Admin\ProdukController;
+use App\Http\Controllers\Admin\KategoriController as Kategori;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 
 Route::prefix('admin')->group(function() {
-    Route::resource('produk', Admin\ProdukController::class);
+    Route::resource('produk', ProdukController::class);
+    Route::resource('kategori', Kategori::class);
 });
 
 
@@ -40,6 +43,6 @@ Route::get('/pengelolaan', [PageController::class, 'pengelolaan'])->name('pengel
 
 // LOGOUT
 Route::get('/logout', function () {
-    Session::flush();
+    // Session::flush();
     return redirect()->route('login')->with('success', 'Berhasil logout.');
 })->name('logout');

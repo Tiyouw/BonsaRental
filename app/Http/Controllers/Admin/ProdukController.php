@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Produk; // Pastikan import model dengan benar
+use App\Models\Kategori; // Import model kategori
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller {
@@ -12,7 +14,7 @@ class ProdukController extends Controller {
     }
 
     public function create() {
-        $kategoris = KategoriProduk::all();
+        $kategoris = Kategori::all();
         return view('admin.produk.create', compact('kategoris'));
     }
 
