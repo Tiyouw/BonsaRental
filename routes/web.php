@@ -5,6 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'landing'])->name('landing');
 
+Route::prefix('admin')->group(function() {
+    Route::resource('produk', Admin\ProdukController::class);
+});
+
+
 // REGISTER
 Route::get('/register', [PageController::class, 'register'])->name('register');
 Route::post('/register', [PageController::class, 'submitRegister'])->name('register.submit');
@@ -35,6 +40,6 @@ Route::get('/pengelolaan', [PageController::class, 'pengelolaan'])->name('pengel
 
 // LOGOUT
 Route::get('/logout', function () {
-    Session::flush(); // Menghapus semua data session
+    Session::flush();
     return redirect()->route('login')->with('success', 'Berhasil logout.');
 })->name('logout');
