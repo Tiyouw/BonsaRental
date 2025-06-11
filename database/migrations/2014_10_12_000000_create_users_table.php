@@ -9,14 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+   public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            // Menggunakan 'name' sebagai kolom utama untuk login (sesuai permintaan "gunakan name")
+            $table->string('name')->unique(); // <-- Ubah dari 'username' menjadi 'name'
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            // Kolom role dengan tipe enum
+            $table->enum('role', ['admin', 'pelanggan'])->default('pelanggan');
+            // Kolom tambahan untuk profil pengguna
+            $table->string('nama_lengkap')->nullable();
+            $table->string('no_telepon')->nullable();
+            $table->text('alamat')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

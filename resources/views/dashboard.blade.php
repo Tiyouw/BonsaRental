@@ -14,106 +14,94 @@
             </a>
             <a href="{{ route('pengelolaan', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m7 0V5a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h-2"></path>
                 </svg>
                 <span>Pengelolaan</span>
             </a>
-            <a href="#" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
+            <a href="{{ route('riwayatAdmin', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                 </svg>
-                <span>Riwayat</span>
+                <span>Riwayat Penyewaan</span>
             </a>
             <a href="{{ route('profile', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
-                <span>Profile</span>
+                <span>Profil</span>
+            </a>
+            <a href="{{ route('logout') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
+                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+                <span>Logout</span>
             </a>
         </div>
     </div>
+    <div class="flex-grow md:ml-64 pt-16 p-4">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Selamat datang, {{ $username }}!</h1>
 
-    <div class="w-full md:ml-64 px-4 py-8">
-        <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                <div>
-                    <h1 class="text-2xl font-bold">Dashboard</h1>
-                    <p class="text-gray-600">Aktivitas dalam BonsaRental</p>
-                </div>
-                <div class="flex items-center mt-4 md:mt-0">
-                    <button class="mr-4 p-2 border rounded-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
-                    </button>
-                    <div class="flex items-center">
-                        <img src="images/comot.png" alt="Profile" class="w-10 h-10 rounded-full">
-                        <div class="ml-3">
-                            <h6 class="font-medium">{{ $username }}</h6>
-                            <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">Jumlah Produk Tersedia</h2>
+                <p class="text-3xl font-bold text-primary">{{ $totalProduk }}</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="bg-primary rounded-lg overflow-hidden text-white">
-                    <div class="p-6 flex flex-col md:flex-row justify-between h-full">
-                        <div class="mb-4 md:mb-0 md:w-2/3">
-                            <h3 class="text-xl font-semibold mb-3">Sewa Perlengkapan Fotografi</h3>
-                            <p class="mb-4">Mulai dari Rp 50.000/hari aja!</p>
-                            <a href="#" class="inline-block bg-white text-primary hover:bg-light px-4 py-2 rounded-md">Cek sekarang</a>
-                        </div>
-                        <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-accent rounded-lg overflow-hidden text-gray-800">
-                    <div class="p-6 flex flex-col md:flex-row justify-between h-full">
-                        <div class="mb-4 md:mb-0 md:w-2/3">
-                            <h3 class="text-xl font-semibold mb-3">Sewa Perlengkapan Fotografi</h3>
-                            <p class="mb-4">Mulai dari Rp 50.000/hari aja!</p>
-                            <a href="#" class="inline-block bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 rounded-md">Cek sekarang</a>
-                        </div>
-                        <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
-                        </div>
-                    </div>
-                </div>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-lg font-semibold text-gray-700 mb-2">Total Penyewaan Bulan Ini</h2>
+                <p class="text-3xl font-bold text-primary">{{ $totalPenyewaanBulanIni }}</p>
             </div>
+        </div>
 
-            <div class="bg-white rounded-lg shadow-md p-6 mt-8">
-                <h3 class="text-xl font-semibold mb-6">Riwayat Penyewaan</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full table-auto">
-                        <thead>
-                            <tr class="bg-gray-100">
-                                <th class="px-4 py-2 text-left">Tanggal</th>
-                                <th class="px-4 py-2 text-left">Barang</th>
-                                <th class="px-4 py-2 text-left">Harga</th>
-                                <th class="px-4 py-2 text-left">Penyewa</th>
-                                <th class="px-4 py-2 text-left">Status</th>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Riwayat Penyewaan Terbaru</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full table-auto">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-4 py-2 text-left">Tanggal</th>
+                            <th class="px-4 py-2 text-left">Barang</th>
+                            <th class="px-4 py-2 text-left">Harga</th>
+                            <th class="px-4 py-2 text-left">Penyewa</th>
+                            <th class="px-4 py-2 text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($rentalHistory as $history)
+                        <tr class="border-b hover:bg-gray-50">
+                            {{-- Mengakses kolom tanggal_mulai_sewa dan memformatnya --}}
+                            <td class="px-4 py-3">{{ $history->tanggal_mulai_sewa->format('d M Y') }}</td>
+                            {{-- Mengakses nama produk melalui relasi 'produk' --}}
+                            <td class="px-4 py-3">{{ $history->produk->nama }}</td>
+                            {{-- Mengakses total_harga dan memformatnya --}}
+                            <td class="px-4 py-3">Rp {{ number_format($history->total_harga, 0, ',', '.') }}</td>
+                            {{-- Mengakses nama user melalui relasi 'user' --}}
+                            <td class="px-4 py-3">{{ $history->user->name }}</td>
+                            <td class="px-4 py-3">
+                                @php
+                                    $statusColor = match($history->status) {
+                                        'Selesai' => 'bg-green-100 text-green-800',
+                                        'Dibatalkan' => 'bg-red-100 text-red-800',
+                                        'Diproses' => 'bg-blue-100 text-blue-800', // Contoh status baru
+                                        'menunggu_pembayaran' => 'bg-gray-100 text-gray-800',
+                                        'menunggu_konfirmasi_admin' => 'bg-yellow-100 text-yellow-800',
+                                        default => 'bg-gray-100 text-gray-800',
+                                    };
+                                @endphp
+                                <span class="{{ $statusColor }} text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    {{ ucwords(str_replace('_', ' ', $history->status)) }}
+                                </span>
+                            </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center py-4 text-gray-500">Tidak ada riwayat penyewaan terbaru.</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($rentalHistory as $history)
-                            <tr class="border-b hover:bg-gray-50">
-                                <td class="px-4 py-3">{{ $history['tanggal'] }}</td>
-                                <td class="px-4 py-3">{{ $history['barang'] }}</td>
-                                <td class="px-4 py-3">{{ number_format($history['harga'], 0, ',', '.') }}</td>
-                                <td class="px-4 py-3">{{ $history['penyewa'] }}</td>
-                                <td class="px-4 py-3">
-                                    <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">{{ $history['status'] }}</span>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-right mt-4">
-                    <a href="#" class="text-primary hover:underline">Lihat Selengkapnya</a>
-                </div>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-right mt-4">
+                <a href="{{ route ('riwayatAdmin', ['username' => $username]) }}" class="text-primary hover:underline">Lihat Selengkapnya</a>
             </div>
         </div>
     </div>
