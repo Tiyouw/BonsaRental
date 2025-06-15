@@ -1,52 +1,95 @@
 @extends('layouts.app')
 
-@section('title', 'Register - BonsaRental')
-
 @section('content')
-<div class="flex flex-col lg:flex-row min-h-screen">
-    <div class="w-full lg:w-1/2 bg-primary p-8 lg:p-16 flex items-center">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
         <div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
-            <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
-            <a href="{{ route('login') }}" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">Login Sekarang!</a>
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Daftar Akun Baru
+            </h2>
         </div>
-    </div>
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold mb-2">bonsarental</h3>
-                <h2 class="text-3xl font-semibold">Daftar</h2>
+
+        @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <form class="mt-8 space-y-6" action="{{ route('register') }}" method="POST">
+            @csrf
+
+            <div class="rounded-md shadow-sm space-y-4">
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input id="email" name="email" type="email" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        value="{{ old('email') }}"
+                    >
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input id="password" name="password" type="password" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    >
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
+                    <input id="password_confirmation" name="password_confirmation" type="password" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    >
+                </div>
+
+                <!-- Nama Lengkap -->
+                <div>
+                    <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input id="nama_lengkap" name="nama_lengkap" type="text" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        value="{{ old('nama_lengkap') }}"
+                    >
+                </div>
+
+                <!-- No HP -->
+                <div>
+                    <label for="no_hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+                    <input id="no_hp" name="no_hp" type="text" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        value="{{ old('no_hp') }}"
+                    >
+                </div>
+
+                <!-- Alamat -->
+                <div>
+                    <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
+                    <textarea id="alamat" name="alamat" rows="3" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                    >{{ old('alamat') }}</textarea>
+                </div>
             </div>
-            <form method="POST" action="{{ route('register.submit') }}">
-                @csrf
-                <div class="mb-6">
-                    <label for="nama_lengkap" class="block text-gray-700 mb-2">Nama Lengkap</label>
-                    <input type="text" id="nama_lengkap" name="nama_lengkap" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <div class="mb-6">
-                    <label for="username" class="block text-gray-700 mb-2">Username</label>
-                    <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 mb-2">Password</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <div class="mb-6">
-                    <label for="email" class="block text-gray-700 mb-2">Email</label>
-                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <div class="mb-6">
-                    <label for="no_hp" class="block text-gray-700 mb-2">No HP</label>
-                    <input type="text" id="no_hp" name="no_hp" class="w-full px-4 py-2 border rounded-md" required>
-                </div>
-                <div class="mb-6">
-                    <label for="alamat" class="block text-gray-700 mb-2">Alamat</label>
-                    <textarea id="alamat" name="alamat" class="w-full px-4 py-2 border rounded-md" required></textarea>
-                </div>
-                <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-md hover:bg-secondary transition-colors">Daftar</button>
-            </form>
-            <p class="text-center mt-6">Sudah punya akun? <a href="{{ route('login') }}" class="text-primary hover:underline">Login</a></p>
-        </div>
+
+            <div>
+                <button type="submit" 
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                    Daftar
+                </button>
+            </div>
+
+            <div class="text-sm text-center">
+                <span class="text-gray-600">Sudah punya akun?</span>
+                <a href="{{ route('login') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                    Login
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

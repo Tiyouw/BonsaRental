@@ -11,7 +11,7 @@
         <div class="flex flex-col items-center mb-6">
             <img src="{{ $user->gambar ? asset('storage/' . $user->gambar) : asset('images/comot.png') }}"
             class="w-24 h-24 rounded-full mb-4">
-            <p class="text-xl font-semibold">Halo, {{ $user->username }}!</p>
+            <p class="text-xl font-semibold">Halo, {{ $user->nama_lengkap }}!</p>
             <p class="text-gray-500">Member sejak {{ $user->created_at->format('F Y') }}</p>
         </div>
 

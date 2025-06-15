@@ -19,11 +19,6 @@
 
             <div class="space-y-4">
                 <div>
-                    <label class="text-gray-600">Username</label>
-                    <input type="text" name="username" value="{{ $user->username }}" class="w-full px-4 py-2 border rounded-md" required>
-                </div>
-
-                <div>
                     <label class="text-gray-600">Nama Lengkap</label>
                     <input type="text" name="nama_lengkap" value="{{ $user->nama_lengkap }}" class="w-full px-4 py-2 border rounded-md" required>
                 </div>

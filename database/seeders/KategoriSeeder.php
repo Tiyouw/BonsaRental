@@ -11,12 +11,10 @@ class KategoriSeeder extends Seeder
     {
         $categories = [
             [
-                'nama_kategori' => 'Kamera',
-                'deskripsi' => 'Berbagai jenis kamera untuk disewa'
+                'nama_kategori' => 'Kamera'
             ],
             [
-                'nama_kategori' => 'Lensa',
-                'deskripsi' => 'Lensa kamera dengan berbagai focal length'
+                'nama_kategori' => 'Lensa'
             ]
         ];
 

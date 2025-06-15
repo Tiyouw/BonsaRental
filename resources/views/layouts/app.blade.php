@@ -38,10 +38,21 @@
                             <a href="{{ route('login') }}" class="text-black hover:text-light px-3 py-2 mx-2">Masuk</a>
                             <a href="{{ route('register') }}" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
                         </div>
-                    {{-- @else
-                        <a href="{{ route('dashboardPelanggan', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
-                        <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
-                        <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a> --}}
+                    @else
+                        @auth
+                            @if(Auth::user()->isAdmin())
+                                <a href="{{ route('admin.dashboard') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
+                                <a href="{{ route('pengelolaan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
+                            @else
+                                <a href="{{ route('katalog') }}" class="text-black hover:text-light px-3 py-2 mx-2">Katalog</a>
+                                <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
+                            @endif
+                            <a href="{{ route('profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
+                            <form action="{{ route('logout') }}" method="POST" class="inline">
+                                @csrf
+                                <button type="submit" class="text-black hover:text-light px-3 py-2 mx-2">Logout</button>
+                            </form>
+                        @endauth
                     @endif
                 </div>
             </div>
@@ -58,10 +69,21 @@
                 @if(request()->routeIs('landing'))
                     <a href="{{ route('login') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Masuk</a>
                     <a href="{{ route('register') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
-                {{-- @else
-                    <a href="{{ route('dashboardPelanggan', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
-                    <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
-                    <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a> --}}
+                @else
+                    @auth
+                        @if(Auth::user()->isAdmin())
+                            <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
+                            <a href="{{ route('pengelolaan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
+                        @else
+                            <a href="{{ route('katalog') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Katalog</a>
+                            <a href="{{ route('riwayatBooking') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Riwayat</a>
+                        @endif
+                        <a href="{{ route('profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="block w-full text-left px-3 py-2 text-white hover:bg-primary/50 rounded-md">Logout</button>
+                        </form>
+                    @endauth
                 @endif
             </div>
         </div>

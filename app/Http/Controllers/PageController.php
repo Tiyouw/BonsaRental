@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -14,18 +15,18 @@ class PageController extends Controller
 
     public function dashboard()
     {
-        $username = session('username', 'Admin');
+        $user = Auth::user();
         $rentalHistory = [
             ['tanggal' => '30 April', 'barang' => 'Canon 60D', 'harga' => 150000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
             ['tanggal' => '20 Mei', 'barang' => 'Canon 18-55mm', 'harga' => 30000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
         ];
-        return view('admin.dashboard', compact('username', 'rentalHistory'));
+        return view('admin.dashboard', compact('user', 'rentalHistory'));
     }
-     public function dashboardPelanggan()
+    public function dashboardPelanggan()
     {
-        $username = session('username', 'Pelanggan');
-        $catalogItems = $this->catalogItems; // pakai data dummy property
-        return view('pelanggan.dashboardPelanggan', compact('username', 'catalogItems'));
+        $user = Auth::user();
+        $catalogItems = $this->catalogItems;
+        return view('pelanggan.dashboardPelanggan', compact('user', 'catalogItems'));
     }
 
         public function detailProduk($id)
@@ -55,35 +56,34 @@ class PageController extends Controller
 
     public function pengelolaan()
     {
-        $username = session('username', 'Pengguna');
+        $user = Auth::user();
         $catalogItems = [
             ['id' => 1, 'nama' => 'Canon 60D', 'kategori' => 'Kamera', 'harga' => 150000, 'stok' => 'Tersedia', 'deskripsi' => 'Kamera DSLR 18MP', 'gambar' => 'images/camera.png'],
             ['id' => 2, 'nama' => 'Canon 18-55mm', 'kategori' => 'Lensa', 'harga' => 30000, 'stok' => 'Tidak Tersedia', 'deskripsi' => 'Lensa kit standar', 'gambar' => 'images/camera.png'],
         ];
-        return view('pengelolaan', compact('username', 'catalogItems'));
+        return view('pengelolaan', compact('user', 'catalogItems'));
     }
 
     public function riwayatBooking()
     {
-        $username = session('username', 'Pelanggan');
+        $user = Auth::user();
         $riwayat = [
             ['produk' => 'Kamera Canon EOS R5', 'tanggal' => '2025-05-20', 'durasi' => '2 Hari', 'status' => 'Selesai'],
             ['produk' => 'Lensa 50mm f/1.8', 'tanggal' => '2025-05-15', 'durasi' => '1 Hari', 'status' => 'Selesai'],
             ['produk' => 'Lighting Kit Godox', 'tanggal' => '2025-05-10', 'durasi' => '3 Hari', 'status' => 'Dibatalkan'],
         ];
-        return view('riwayatBooking', compact('username', 'riwayat'));
+        return view('riwayatBooking', compact('user', 'riwayat'));
     }
 
     public function riwayatAdmin()
     {
-        $username = session('username', 'Admin');
-
+        $user = Auth::user();
         $rentalHistory = [
-            ['tanggal' => '2025-05-25', 'barang' => 'Canon EOS 700D', 'harga' => 120000, 'penyewa' => $username, 'status' => 'Selesai'],
-            ['tanggal' => '2025-05-30', 'barang' => 'Lensa 50mm f/1.8', 'harga' => 75000, 'penyewa' => $username, 'status' => 'Diproses'],
+            ['tanggal' => '2025-05-25', 'barang' => 'Canon EOS 700D', 'harga' => 120000, 'penyewa' => $user->nama_lengkap, 'status' => 'Selesai'],
+            ['tanggal' => '2025-05-30', 'barang' => 'Lensa 50mm f/1.8', 'harga' => 75000, 'penyewa' => $user->nama_lengkap, 'status' => 'Diproses'],
         ];
 
-        return view('riwayatAdmin', compact('username', 'rentalHistory'));
+        return view('riwayatAdmin', compact('user', 'rentalHistory'));
     }
 }
 

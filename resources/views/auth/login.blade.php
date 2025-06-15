@@ -1,46 +1,71 @@
 @extends('layouts.app')
 
-@section('title', 'Login - BonsaRental')
-
 @section('content')
-<div class="flex flex-col lg:flex-row min-h-screen">
-    <div class="w-full lg:w-1/2 bg-primary p-8 lg:p-16 flex items-center">
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
         <div>
-            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
-            <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
-            <a href="{{ route('register') }}" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">Daftar Sekarang!</a>
-            <div class="mt-12">
+            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                Login
+            </h2>
+        </div>
+
+        @if ($errors->any())
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <form class="mt-8 space-y-6" action="{{ route('login') }}" method="POST">
+            @csrf
+
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <label for="email" class="sr-only">Email</label>
+                    <input id="email" name="email" type="email" required 
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        placeholder="Email"
+                        value="{{ old('email') }}"
+                    >
+                </div>
+                <div>
+                    <label for="password" class="sr-only">Password</label>
+                    <input id="password" name="password" type="password" required 
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        placeholder="Password"
+                    >
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between">
                 <div class="flex items-center">
-                    <div class="mr-4">
-                        <span class="text-white font-bold">01</span>
-                    </div>
-                    <div class="w-full h-0.5 bg-white/30 relative">
-                        <div class="absolute left-0 top-0 w-1/4 h-0.5 bg-white"></div>
-                    </div>
+                    <input id="remember" name="remember" type="checkbox" 
+                        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    >
+                    <label for="remember" class="ml-2 block text-sm text-gray-900">
+                        Ingat saya
+                    </label>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="w-full lg:w-1/2 flex items-center justify-center p-8">
-        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-            <div class="text-center mb-8">
-                <h3 class="text-2xl font-bold mb-2">bonsarental</h3>
-                <h2 class="text-3xl font-semibold">Masuk</h2>
+
+            <div>
+                <button type="submit" 
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                >
+                    Login
+                </button>
             </div>
-            <form method="POST" action="{{ route('login.submit') }}">
-                @csrf
-                <div class="mb-6">
-                    <label for="username" class="block text-gray-700 mb-2">Username</label>
-                    <input type="text" id="username" name="username" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <div class="mb-6">
-                    <label for="password" class="block text-gray-700 mb-2">Password</label>
-                    <input type="password" id="password" name="password" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" required>
-                </div>
-                <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-md hover:bg-secondary transition-colors">Masuk</button>
-            </form>
-            <p class="text-center mt-6">New to BonsaRental? <a href="register" class="text-primary hover:underline">Daftar</a></p>
-        </div>
+
+            <div class="text-sm text-center">
+                <span class="text-gray-600">Belum punya akun?</span>
+                <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                    Daftar sekarang
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

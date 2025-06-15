@@ -13,11 +13,10 @@ class Kategori extends Model
     protected $primaryKey = 'id_kategori';
 
     protected $fillable = [
-        'nama_kategori',
-        'deskripsi'
+        'nama_kategori'
     ];
 
-    // Relationship with products
+    // Relationship with products (One-to-Many)
     public function produks()
     {
         return $this->hasMany(Produk::class, 'id_kategori');

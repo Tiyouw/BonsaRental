@@ -1,99 +1,84 @@
 <?php
 
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\admin\PengelolaanController;
-use App\Http\Controllers\admin\ProdukController;
-use App\Http\Controllers\admin\KategoriController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\Admin\PengelolaanController;
+use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
-Route::get('/', [PageController::class, 'landing'])->name('landing');
+// Guest routes
+Route::middleware('guest')->group(function () {
+    // Login
+    Route::get('auth/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('auth/login', [AuthController::class, 'login'])->name('login.submit');
 
-// REGISTER
-Route::get('auth/register', [AuthController::class, 'register'])->name('register');
-Route::post('auth/register', [AuthController::class, 'submitRegister'])->name('register.submit');
+    // Register
+    Route::get('auth/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('auth/register', [AuthController::class, 'register'])->name('register.submit');
 
-// LOGIN
-Route::get('auth/login', [AuthController::class, 'login'])->name('login');
-Route::post('auth/login', [AuthController::class, 'submitLogin'])->name('login.submit');
-
-// DASHBOARD
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])
-    ->name('admin.dashboard')
-    ->middleware('auth');
-
-// Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-// Route::get('dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('dashboardPelanggan');
-
-Route::get('/admin/dashboard', [PageController::class, 'dashboard'])->name('admin.dashboard');
-Route::get('/pelanggan/dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('pelanggan.dashboardPelanggan');
-
-// PRODUK
-Route::get('/detailProduk/{id}', [PageController::class, 'detailProduk'])->name('detailProduk');
-Route::post('/detailProduk/{id}/upload-bukti', [PageController::class, 'uploadBukti'])->name('uploadBukti');
-
-// TAMBAH PRODUK
-// Route::get('/tambahProduk', [PageController::class, 'create'])->name('produk.create');
-// Route::post('/tambahProduk', [PageController::class, 'store'])->name('produk.store');
-
-// PROFILE
-Route::get('/profile', [ProfilController::class, 'profile'])->name('profile');
-Route::get('/profilePelanggan', [ProfilController::class, 'profilePelanggan'])->name('profilePelanggan');
-Route::get('/EditProfil', [ProfilController::class, 'edit'])->name('EditProfil');
-Route::put('/EditProfil', [ProfilController::class, 'update'])->name('profile.update');
-Route::get('/admin/profile', [ProfilController::class, 'profile'])->name('admin.profile');
-Route::get('/admin/profile/edit', [ProfilController::class, 'editAdmin'])->name('admin.profile.edit');
-Route::put('/admin/profile/update', [ProfilController::class, 'updateAdmin'])->name('admin.profile.update');
-
-// BOOKING
-Route::middleware('auth')->group(function() {
-    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
-    Route::get('/riwayat-booking', [BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
-    Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
-    Route::post('/booking/{id}/cancel', [BookingController::class, 'cancel'])->name('booking.cancel');
+    // Redirect root to login for guests
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
 });
 
-// RIWAYAT ADMIN
-Route::get('admin/riwayatAdmin', [PageController::class, 'riwayatAdmin'])->name('admin.riwayatAdmin');
+// Authenticated routes
+Route::middleware('auth')->group(function () {
+    // Logout
+    Route::post('auth/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Profile for all users
+    Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
+    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
 
+    // Customer routes
+    Route::middleware('customer')->group(function () {
+        // Katalog & Booking
+        Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
+        Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
+        
+        // Booking routes
+        Route::get('/booking/{id}', [BookingController::class, 'form'])->name('booking.form');
+        Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+        Route::get('/booking/riwayat', [BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
+        Route::get('/booking/detail/{id}', [BookingController::class, 'show'])->name('booking.show');
+        Route::post('/booking/cancel/{id}', [BookingController::class, 'cancel'])->name('booking.cancel');
+        Route::post('/booking/{id}/upload-bukti', [BookingController::class, 'uploadBukti'])->name('uploadBukti');
 
+        // Set katalog as home for customers
+        Route::get('/', function () {
+            return redirect()->route('katalog');
+        });
+    });
 
-// // PENGELOLAAN
-// Route::get('admin/pengelolaan', [ProdukController::class, 'index'])->name('admin.pengelolaan');
+    // Admin routes
+    Route::prefix('admin')->middleware('admin')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
 
-// LOGOUT
-Route::get('auth/logout', [AuthController::class, 'logout'])->name('logout');
+        // Set dashboard as home for admin
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard');
+        });
 
-// Customer routes
-Route::middleware(['auth'])->group(function() {
-    // Katalog & Booking
-    Route::get('/katalog', [App\Http\Controllers\KatalogController::class, 'index'])->name('katalog');
-    Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'form'])->name('booking.form');
-    Route::post('/booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
-    Route::get('/booking/riwayat', [App\Http\Controllers\BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
-    Route::get('/booking/detail/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
-    Route::post('/booking/cancel/{id}', [App\Http\Controllers\BookingController::class, 'cancel'])->name('booking.cancel');
-});
+        // Pengelolaan routes
+        Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
+        Route::get('/pengelolaan/tambah', [PengelolaanController::class, 'create'])->name('pengelolaan.create');
+        Route::post('/pengelolaan', [PengelolaanController::class, 'store'])->name('pengelolaan.store');
+        Route::get('/pengelolaan/{id}/edit', [PengelolaanController::class, 'edit'])->name('pengelolaan.edit');
+        Route::put('/pengelolaan/{id}', [PengelolaanController::class, 'update'])->name('pengelolaan.update');
+        Route::delete('/pengelolaan/{id}', [PengelolaanController::class, 'destroy'])->name('pengelolaan.destroy');
 
-// Admin routes
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
-    // Existing pengelolaan routes
-    Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
-    Route::get('/pengelolaan/tambah', [PengelolaanController::class, 'create'])->name('pengelolaan.create');
-    Route::post('/pengelolaan', [PengelolaanController::class, 'store'])->name('pengelolaan.store');
-    Route::get('/pengelolaan/{id}/edit', [PengelolaanController::class, 'edit'])->name('pengelolaan.edit');
-    Route::put('/pengelolaan/{id}', [PengelolaanController::class, 'update'])->name('pengelolaan.update');
-    Route::delete('/pengelolaan/{id}', [PengelolaanController::class, 'destroy'])->name('pengelolaan.destroy');
-
-    // Admin booking management routes
-    Route::prefix('bookings')->name('admin.bookings.')->group(function() {
-        Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('index');
-        Route::get('/{id}', [App\Http\Controllers\Admin\BookingController::class, 'show'])->name('show');
-        Route::put('/{id}/status-booking', [App\Http\Controllers\Admin\BookingController::class, 'updateStatusBooking'])->name('update-status-booking');
-        Route::put('/{id}/status-sewa', [App\Http\Controllers\Admin\BookingController::class, 'updateStatusSewa'])->name('update-status-sewa');
-        Route::delete('/{id}', [App\Http\Controllers\Admin\BookingController::class, 'destroy'])->name('destroy');
+        // Admin booking management
+        Route::prefix('bookings')->name('admin.bookings.')->group(function () {
+            Route::get('/', [AdminBookingController::class, 'index'])->name('index');
+            Route::get('/{id}', [AdminBookingController::class, 'show'])->name('show');
+            Route::put('/{id}/status-booking', [AdminBookingController::class, 'updateStatusBooking'])->name('update-status-booking');
+            Route::put('/{id}/status-sewa', [AdminBookingController::class, 'updateStatusSewa'])->name('update-status-sewa');
+            Route::delete('/{id}', [AdminBookingController::class, 'destroy'])->name('destroy');
+        });
     });
 });
