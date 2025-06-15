@@ -3,7 +3,6 @@
 @section('title', 'Profil Pelanggan - BonsaRental')
 
 @section('content')
-<x-navbar />
 <div class="container mx-auto py-10">
     <div class="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <h1 class="text-2xl font-bold text-primary mb-6">Profil Pelanggan</h1>
@@ -38,12 +37,15 @@
         </div>
 
         <div class="mt-6 flex justify-between">
-            <a href="{{ route('logout') }}"
-               onclick="return confirm('Apakah Anda yakin ingin logout?')"
-               class="py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700">
-                Logout
-            </a>
-            <a href="{{ route('profile.update') }}"
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" 
+                    onclick="return confirm('Apakah Anda yakin ingin logout?')"
+                    class="py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700">
+                    Logout
+                </button>
+            </form>
+            <a href="{{ route('profile') }}"
                class="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">
                 Edit Profil
             </a>

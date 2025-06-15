@@ -7,6 +7,11 @@ use App\Http\Controllers\Admin\PengelolaanController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use Illuminate\Support\Facades\Route;
 
+// Landing page route
+Route::get('/', function () {
+    return view('landing');
+})->name('landing');
+
 // Guest routes
 Route::middleware('guest')->group(function () {
     // Login
@@ -16,11 +21,6 @@ Route::middleware('guest')->group(function () {
     // Register
     Route::get('auth/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('auth/register', [AuthController::class, 'register'])->name('register.submit');
-
-    // Redirect root to login for guests
-    Route::get('/', function () {
-        return redirect()->route('login');
-    });
 });
 
 // Authenticated routes
@@ -34,6 +34,16 @@ Route::middleware('auth')->group(function () {
 
     // Customer routes
     Route::middleware('customer')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', function () {
+            return view('pelanggan.dashboardPelanggan');
+        })->name('dashboardPelanggan');
+
+        // Profile
+        Route::get('/profile/pelanggan', function () {
+            return view('pelanggan.profilePelanggan');
+        })->name('profilePelanggan');
+
         // Katalog & Booking
         Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
         Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
@@ -45,11 +55,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/booking/detail/{id}', [BookingController::class, 'show'])->name('booking.show');
         Route::post('/booking/cancel/{id}', [BookingController::class, 'cancel'])->name('booking.cancel');
         Route::post('/booking/{id}/upload-bukti', [BookingController::class, 'uploadBukti'])->name('uploadBukti');
-
-        // Set katalog as home for customers
-        Route::get('/', function () {
-            return redirect()->route('katalog');
-        });
     });
 
     // Admin routes
@@ -63,6 +68,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/', function () {
             return redirect()->route('admin.dashboard');
         });
+
+        // Riwayat Admin
+        Route::get('/riwayat', function () {
+            return view('admin.riwayatAdmin');
+        })->name('admin.riwayatAdmin');
 
         // Pengelolaan routes
         Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
