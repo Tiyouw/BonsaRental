@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class produkSeeder extends Seeder
+class ProdukSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-       public function run()
+    public function run()
     {
-    DB::table('produk')->insert([
+        DB::table('produk')->insert([
             [
                 'nama_produk' => 'Canon 60D',
                 'deskripsi' => 'Kamera DSLR profesional dengan resolusi 18MP',
@@ -44,5 +44,5 @@ class produkSeeder extends Seeder
                 'updated_at' => now()
             ]
         ]);
-}
+    }
 }

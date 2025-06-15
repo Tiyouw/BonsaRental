@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class kategoriSeeder extends Seeder
+class KategoriSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,5 +18,5 @@ class kategoriSeeder extends Seeder
         ['nama_kategori' => 'Tripod'],
         ['nama_kategori' => 'Aksesoris']
     ]);
-    }
+}
 }
