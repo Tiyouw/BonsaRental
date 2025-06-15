@@ -2,16 +2,20 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        $this->call(UserSeeder::class);
+        // Run all seeders in correct order
+        $this->call([
+            UserSeeder::class,        // Create admin and customer users
+            KategoriSeeder::class,    // Create product categories
+            ProdukSeeder::class,      // Create sample products
+            BookingSeeder::class,     // Create sample bookings
+        ]);
     }
 }

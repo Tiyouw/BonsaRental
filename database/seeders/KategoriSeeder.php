@@ -1,22 +1,27 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Kategori;
 use Illuminate\Database\Seeder;
 
 class KategoriSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-    DB::table('kategori_produk')->insert([
-        ['nama_kategori' => 'Kamera'],
-        ['nama_kategori' => 'Lensa'],
-        ['nama_kategori' => 'Tripod'],
-        ['nama_kategori' => 'Aksesoris']
-    ]);
-}
+        $categories = [
+            [
+                'nama_kategori' => 'Kamera',
+                'deskripsi' => 'Berbagai jenis kamera untuk disewa'
+            ],
+            [
+                'nama_kategori' => 'Lensa',
+                'deskripsi' => 'Lensa kamera dengan berbagai focal length'
+            ]
+        ];
+
+        foreach ($categories as $category) {
+            Kategori::create($category);
+        }
+    }
 }

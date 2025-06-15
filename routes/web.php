@@ -48,9 +48,17 @@ Route::get('/admin/profile', [ProfilController::class, 'profile'])->name('admin.
 Route::get('/admin/profile/edit', [ProfilController::class, 'editAdmin'])->name('admin.profile.edit');
 Route::put('/admin/profile/update', [ProfilController::class, 'updateAdmin'])->name('admin.profile.update');
 
-// RIWAYAT
-Route::get('/riwayat', [PageController::class, 'riwayatBooking'])->name('riwayatBooking');
+// BOOKING
+Route::middleware('auth')->group(function() {
+    Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+    Route::get('/riwayat-booking', [BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
+    Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+    Route::post('/booking/{id}/cancel', [BookingController::class, 'cancel'])->name('booking.cancel');
+});
+
+// RIWAYAT ADMIN
 Route::get('admin/riwayatAdmin', [PageController::class, 'riwayatAdmin'])->name('admin.riwayatAdmin');
+
 
 
 // // PENGELOLAAN
@@ -59,12 +67,33 @@ Route::get('admin/riwayatAdmin', [PageController::class, 'riwayatAdmin'])->name(
 // LOGOUT
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('logout');
 
-// routes/web.php
-Route::prefix('admin')->group(function() {
+// Customer routes
+Route::middleware(['auth'])->group(function() {
+    // Katalog & Booking
+    Route::get('/katalog', [App\Http\Controllers\KatalogController::class, 'index'])->name('katalog');
+    Route::get('/booking/{id}', [App\Http\Controllers\BookingController::class, 'form'])->name('booking.form');
+    Route::post('/booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
+    Route::get('/booking/riwayat', [App\Http\Controllers\BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
+    Route::get('/booking/detail/{id}', [App\Http\Controllers\BookingController::class, 'show'])->name('booking.show');
+    Route::post('/booking/cancel/{id}', [App\Http\Controllers\BookingController::class, 'cancel'])->name('booking.cancel');
+});
+
+// Admin routes
+Route::prefix('admin')->middleware(['auth', 'admin'])->group(function() {
+    // Existing pengelolaan routes
     Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
     Route::get('/pengelolaan/tambah', [PengelolaanController::class, 'create'])->name('pengelolaan.create');
     Route::post('/pengelolaan', [PengelolaanController::class, 'store'])->name('pengelolaan.store');
     Route::get('/pengelolaan/{id}/edit', [PengelolaanController::class, 'edit'])->name('pengelolaan.edit');
     Route::put('/pengelolaan/{id}', [PengelolaanController::class, 'update'])->name('pengelolaan.update');
     Route::delete('/pengelolaan/{id}', [PengelolaanController::class, 'destroy'])->name('pengelolaan.destroy');
+
+    // Admin booking management routes
+    Route::prefix('bookings')->name('admin.bookings.')->group(function() {
+        Route::get('/', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('index');
+        Route::get('/{id}', [App\Http\Controllers\Admin\BookingController::class, 'show'])->name('show');
+        Route::put('/{id}/status-booking', [App\Http\Controllers\Admin\BookingController::class, 'updateStatusBooking'])->name('update-status-booking');
+        Route::put('/{id}/status-sewa', [App\Http\Controllers\Admin\BookingController::class, 'updateStatusSewa'])->name('update-status-sewa');
+        Route::delete('/{id}', [App\Http\Controllers\Admin\BookingController::class, 'destroy'])->name('destroy');
+    });
 });
