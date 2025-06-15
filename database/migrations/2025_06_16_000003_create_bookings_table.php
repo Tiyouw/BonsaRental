@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->decimal('total_harga', 10, 2);
-            $table->enum('status_booking', ['pending', 'confirmed', 'cancelled'])->default('pending');
+            $table->enum('status_booking', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
             $table->enum('status_sewa', ['belum_diambil', 'sedang_disewa', 'selesai'])->default('belum_diambil');
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();

@@ -17,11 +17,11 @@ class BookingSeeder extends Seeder
         $bookings = [
             [
                 'user_id' => 2, // Assuming user ID 2 is a regular customer
-                'tanggal_booking' => Carbon::now()->subDays(5),
-                'tanggal_kembali' => Carbon::now()->subDays(2),
+                'tanggal_mulai' => Carbon::now()->subDays(5),
+                'tanggal_selesai' => Carbon::now()->subDays(2),
                 'total_harga' => 1500000,
                 'status_booking' => 'disetujui',
-                'status_sewa' => 'dikembalikan',
+                'status_sewa' => 'selesai',
                 'bukti_pembayaran' => 'bukti_pembayaran/sample1.jpg',
                 'created_at' => Carbon::now()->subDays(6),
                 'updated_at' => Carbon::now()->subDays(5),
@@ -35,11 +35,11 @@ class BookingSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'tanggal_booking' => Carbon::now()->subDays(2),
-                'tanggal_kembali' => Carbon::now()->addDays(1),
+                'tanggal_mulai' => Carbon::now()->subDays(2),
+                'tanggal_selesai' => Carbon::now()->addDays(1),
                 'total_harga' => 800000,
                 'status_booking' => 'disetujui',
-                'status_sewa' => 'disewa',
+                'status_sewa' => 'sedang_disewa',
                 'bukti_pembayaran' => 'bukti_pembayaran/sample2.jpg',
                 'created_at' => Carbon::now()->subDays(3),
                 'updated_at' => Carbon::now()->subDays(2),
@@ -53,11 +53,11 @@ class BookingSeeder extends Seeder
             ],
             [
                 'user_id' => 3, // Another customer
-                'tanggal_booking' => Carbon::now()->addDays(1),
-                'tanggal_kembali' => Carbon::now()->addDays(3),
+                'tanggal_mulai' => Carbon::now()->addDays(1),
+                'tanggal_selesai' => Carbon::now()->addDays(3),
                 'total_harga' => 600000,
                 'status_booking' => 'diproses',
-                'status_sewa' => 'belum_disewa',
+                'status_sewa' => 'belum_diambil',
                 'bukti_pembayaran' => 'bukti_pembayaran/sample3.jpg',
                 'created_at' => Carbon::now()->subHours(2),
                 'updated_at' => Carbon::now()->subHours(2),
@@ -71,11 +71,11 @@ class BookingSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'tanggal_booking' => Carbon::now()->subDays(1),
-                'tanggal_kembali' => Carbon::now()->addDays(2),
+                'tanggal_mulai' => Carbon::now()->subDays(1),
+                'tanggal_selesai' => Carbon::now()->addDays(2),
                 'total_harga' => 450000,
                 'status_booking' => 'ditolak',
-                'status_sewa' => 'belum_disewa',
+                'status_sewa' => 'belum_diambil',
                 'bukti_pembayaran' => 'bukti_pembayaran/sample4.jpg',
                 'created_at' => Carbon::now()->subDays(2),
                 'updated_at' => Carbon::now()->subDays(1),
@@ -92,7 +92,7 @@ class BookingSeeder extends Seeder
         foreach ($bookings as $bookingData) {
             $details = $bookingData['details'];
             unset($bookingData['details']);
-            
+
             $booking = Booking::create($bookingData);
 
             foreach ($details as $detail) {
