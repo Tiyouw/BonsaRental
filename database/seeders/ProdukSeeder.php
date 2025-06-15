@@ -28,6 +28,14 @@ class ProdukSeeder extends Seeder
                 'id_kategori' => 1
             ],
             [
+                'nama_produk' => 'Canon 60D',
+                'deskripsi' => 'Kamera DSLR profesional dengan resolusi 18MP',
+                'harga_per_hari' => 150000,
+                'stock' => 5,
+                'gambar' => 'images/canon60d.jpg',
+                'id_kategori' => 1
+            ],
+            [
                 'nama_produk' => 'Nikon Z6',
                 'deskripsi' => 'Kamera mirrorless full-frame 24MP dengan stabilisasi dalam body. Sempurna untuk foto dan video.',
                 'harga_per_hari' => 450000,
@@ -62,12 +70,48 @@ class ProdukSeeder extends Seeder
                 'id_kategori' => 2
             ],
             [
+                'nama_produk' => 'Canon 18-55mm Lens',
+                'deskripsi' => 'Lensa kit standar untuk kamera Canon DSLR',
+                'harga_per_hari' => 50000,
+                'stock' => 8,
+                'gambar' => 'images/canon_lens.jpg',
+                'id_kategori' => 2
+            ],
+            [
                 'nama_produk' => 'Nikon Z 14-30mm f/4 S',
                 'deskripsi' => 'Lensa ultra wide-angle yang ringkas. Ideal untuk landscape dan arsitektur.',
                 'harga_per_hari' => 200000,
                 'stock' => 2,
                 'gambar' => 'products/nikon-14-30.jpg',
                 'id_kategori' => 2
+            ],
+
+            // Tripod (id_kategori: 3)
+            [
+                'nama_produk' => 'Tripod Professional',
+                'deskripsi' => 'Tripod kokoh untuk fotografi profesional',
+                'harga_per_hari' => 75000,
+                'stock' => 10,
+                'gambar' => 'images/tripod.jpg',
+                'id_kategori' => 3
+            ],
+
+            // Aksesoris (id_kategori: 4)
+            [
+                'nama_produk' => 'Flash Speedlite',
+                'deskripsi' => 'Flash eksternal untuk pencahayaan tambahan',
+                'harga_per_hari' => 100000,
+                'stock' => 5,
+                'gambar' => 'images/flash.jpg',
+                'id_kategori' => 4
+            ],
+            [
+                'nama_produk' => 'Filter ND',
+                'deskripsi' => 'Filter Neutral Density untuk kontrol eksposur',
+                'harga_per_hari' => 50000,
+                'stock' => 8,
+                'gambar' => 'images/filter.jpg',
+                'id_kategori' => 4
             ]
         ];
 

@@ -15,6 +15,12 @@ class KategoriSeeder extends Seeder
             ],
             [
                 'nama_kategori' => 'Lensa'
+            ],
+            [
+                'nama_kategori' => 'Tripod'
+            ],
+            [
+                'nama_kategori' => 'Aksesoris'
             ]
         ];
 
