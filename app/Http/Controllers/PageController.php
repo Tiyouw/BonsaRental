@@ -12,6 +12,40 @@ class PageController extends Controller
     ];
     public function landing() { return view('landing'); }
 
+    public function detailProduk($id)
+    {
+        $username = $request->input('username');
+        session(['username' => $username]);
+
+        if ($username === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('dashboardPelanggan');
+        }
+    }
+
+    public function login() { return view('login'); }
+
+    public function submitLogin(Request $request)
+    {
+        $username = $request->input('username');
+        session(['username' => $username]);
+
+        if ($username === 'admin') {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('dashboardPelanggan');
+        }
+    }
+
+    public function register() { return view('register'); }
+
+    public function submitRegister(Request $request)
+    {
+        $username = $request->input('username');
+        session(['username' => $username]);
+        return redirect()->route('dashboardPelanggan');
+    }
 
     public function dashboard()
     {
@@ -20,15 +54,9 @@ class PageController extends Controller
             ['tanggal' => '30 April', 'barang' => 'Canon 60D', 'harga' => 150000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
             ['tanggal' => '20 Mei', 'barang' => 'Canon 18-55mm', 'harga' => 30000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
         ];
-        return view('admin.dashboard', compact('username', 'rentalHistory'));
+        return view('dashboard', compact('username', 'rentalHistory'));
     }
 
-    public function dashboardPelanggan()
-    {
-        $username = session('username', 'Pelanggan');
-        $catalogItems = $this->catalogItems; // pakai data dummy property
-        return view('pelanggan.dashboardPelanggan', compact('username', 'catalogItems'));
-    }
 
     public function detailProduk($id)
     {
@@ -42,21 +70,27 @@ class PageController extends Controller
         return view('detailProduk', compact('produk'));
     }
 
-    // public function create()
-    // {
-    //     return view('tambahProduk');
-    // }
-
     public function uploadBukti(Request $request, $id)
     {
         $request->validate([
-            'bukti_transfer' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+            'bukti_transfer' => 'required|image|mimes:jpeg,png,jpg|max:200000',
         ]);
 
         $path = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
 
         // Add ke db nya yaa
         return back()->with('success', 'Bukti transfer berhasil diunggah!');
+    }
+
+    public function profile()
+    {
+        $username = session('username');
+        return view('profile', compact('username'));
+    }
+    public function profilePelanggan(Request $request)
+    {
+        $username = $request->session()->get('username');
+        return view('profilePelanggan', compact('username'));
     }
 
     public function pengelolaan()
