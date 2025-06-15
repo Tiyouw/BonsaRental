@@ -34,7 +34,7 @@
             <div class="p-6 text-center">
                 <h3 class="text-xl font-semibold mb-2">Kamera</h3>
                 <p class="text-gray-600 mb-4">Berbagai pilihan kamera DSLR dan mirrorless untuk kebutuhan fotografi Anda.</p>
-                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+                <a href="{{ route('login') }}" class="btn-primary inline-block">Lihat Semua</a>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -42,7 +42,7 @@
             <div class="p-6 text-center">
                 <h3 class="text-xl font-semibold mb-2">Lensa</h3>
                 <p class="text-gray-600 mb-4">Lensa berkualitas tinggi untuk berbagai jenis kebutuhan fotografi.</p>
-                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+                <a href="{{ route('login') }}" class="btn-primary inline-block">Lihat Semua</a>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -50,7 +50,7 @@
             <div class="p-6 text-center">
                 <h3 class="text-xl font-semibold mb-2">Lighting</h3>
                 <p class="text-gray-600 mb-4">Peralatan lighting untuk menghasilkan foto dengan pencahayaan sempurna.</p>
-                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+                <a href="{{ route('login') }}" class="btn-primary inline-block">Lihat Semua</a>
             </div>
         </div>
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
@@ -58,7 +58,7 @@
             <div class="p-6 text-center">
                 <h3 class="text-xl font-semibold mb-2">Aksesoris</h3>
                 <p class="text-gray-600 mb-4">Berbagai aksesoris pendukung untuk melengkapi kebutuhan fotografi Anda.</p>
-                <a href="#" class="btn-primary inline-block">Lihat Semua</a>
+                <a href="{{ route('login') }}" class="btn-primary inline-block">Lihat Semua</a>
             </div>
         </div>
     </div>

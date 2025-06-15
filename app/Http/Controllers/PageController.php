@@ -6,118 +6,91 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function landing()
+    public $catalogItems = [
+        ['id' => 1, 'nama' => 'Canon 60D', 'kategori' => 'Kamera', 'harga' => 150000, 'stok' => 'Tersedia', 'deskripsi' => 'Kamera DSLR 18MP', 'gambar' => 'images/camera.png', 'nomor_rekening' => '1234567890'],
+        ['id' => 2, 'nama' => 'Canon 18-55mm', 'kategori' => 'Lensa', 'harga' => 30000, 'stok' => 'Tidak Tersedia', 'deskripsi' => 'Lensa kit standar', 'gambar' => 'images/camera.png', 'nomor_rekening' => '1234567890'],
+    ];
+    public function landing() { return view('landing'); }
+
+
+    public function dashboard()
     {
-        return view('landing');
+        $username = session('username', 'Admin');
+        $rentalHistory = [
+            ['tanggal' => '30 April', 'barang' => 'Canon 60D', 'harga' => 150000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
+            ['tanggal' => '20 Mei', 'barang' => 'Canon 18-55mm', 'harga' => 30000, 'penyewa' => 'Felix Edna', 'status' => 'Selesai'],
+        ];
+        return view('admin.dashboard', compact('username', 'rentalHistory'));
     }
 
-    public function login()
+    public function dashboardPelanggan()
     {
-        return view('login');
+        $username = session('username', 'Pelanggan');
+        $catalogItems = $this->catalogItems; // pakai data dummy property
+        return view('pelanggan.dashboardPelanggan', compact('username', 'catalogItems'));
     }
 
-    public function submit(Request $request)
+    public function detailProduk($id)
     {
-        $username = $request->input('username');
-        return redirect()->route('dashboard', compact('username'));
+        // Cari produk berdasar id di data dummy catalogItems
+        $produk = collect($this->catalogItems)->firstWhere('id', (int)$id);
+
+        if (!$produk) {
+            abort(404, "Produk tidak ditemukan");
+        }
+
+        return view('detailProduk', compact('produk'));
     }
 
-    public function dashboard(Request $request)
+    // public function create()
+    // {
+    //     return view('tambahProduk');
+    // }
+
+    public function uploadBukti(Request $request, $id)
     {
-        $username = $request->query('username', 'Pengguna');
+        $request->validate([
+            'bukti_transfer' => 'required|image|mimes:jpeg,png,jpg|max:2000',
+        ]);
+
+        $path = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
+
+        // Add ke db nya yaa
+        return back()->with('success', 'Bukti transfer berhasil diunggah!');
+    }
+
+    public function pengelolaan()
+    {
+        $username = session('username', 'Pengguna');
+        $catalogItems = [
+            ['id' => 1, 'nama' => 'Canon 60D', 'kategori' => 'Kamera', 'harga' => 150000, 'stok' => 'Tersedia', 'deskripsi' => 'Kamera DSLR 18MP', 'gambar' => 'images/camera.png'],
+            ['id' => 2, 'nama' => 'Canon 18-55mm', 'kategori' => 'Lensa', 'harga' => 30000, 'stok' => 'Tidak Tersedia', 'deskripsi' => 'Lensa kit standar', 'gambar' => 'images/camera.png'],
+        ];
+        return view('pengelolaan', compact('username', 'catalogItems'));
+    }
+
+    public function riwayatBooking()
+    {
+        $username = session('username', 'Pelanggan');
+        $riwayat = [
+            ['produk' => 'Kamera Canon EOS R5', 'tanggal' => '2025-05-20', 'durasi' => '2 Hari', 'status' => 'Selesai'],
+            ['produk' => 'Lensa 50mm f/1.8', 'tanggal' => '2025-05-15', 'durasi' => '1 Hari', 'status' => 'Selesai'],
+            ['produk' => 'Lighting Kit Godox', 'tanggal' => '2025-05-10', 'durasi' => '3 Hari', 'status' => 'Dibatalkan'],
+        ];
+        return view('riwayatBooking', compact('username', 'riwayat'));
+    }
+
+    public function riwayatAdmin()
+    {
+        $username = session('username', 'Admin');
 
         $rentalHistory = [
-            [
-                'tanggal' => '30 April',
-                'barang' => 'Canon 60D',
-                'harga' => 150000,
-                'penyewa' => 'Felix Edna',
-                'status' => 'Selesai'
-            ],
-            [
-                'tanggal' => '20 Mei',
-                'barang' => 'Canon 18-55mm',
-                'harga' => 30000,
-                'penyewa' => 'Felix Edna',
-                'status' => 'Selesai'
-            ],
-            [
-                'tanggal' => '30 April',
-                'barang' => 'Canon 60D',
-                'harga' => 150000,
-                'penyewa' => 'Felix Edna',
-                'status' => 'Selesai'
-            ],
-            [
-                'tanggal' => '20 Mei',
-                'barang' => 'Canon 18-55mm',
-                'harga' => 30000,
-                'penyewa' => 'Felix Edna',
-                'status' => 'Selesai'
-            ],
+            ['tanggal' => '2025-05-25', 'barang' => 'Canon EOS 700D', 'harga' => 120000, 'penyewa' => $username, 'status' => 'Selesai'],
+            ['tanggal' => '2025-05-30', 'barang' => 'Lensa 50mm f/1.8', 'harga' => 75000, 'penyewa' => $username, 'status' => 'Diproses'],
         ];
 
-        return view('dashboard', compact('username', 'rentalHistory'));
-    }
-
-    public function profile(Request $request)
-    {
-        $username = $request->query('username');
-
-        return view('profile', ['username' => $username]);
-    }
-
-    public function pengelolaan(Request $request)
-    {
-        $username = $request->query('username', 'Pengguna');
-        $catalogItems = [
-            [
-                'id' => 1,
-                'nama' => 'Canon 60D',
-                'kategori' => 'Kamera',
-                'harga' => 150000,
-                'stok' => 5,
-                'deskripsi' => 'Kamera DSLR 18MP dengan layar LCD yang dapat diputar',
-                'gambar' => 'images/camera.png'
-            ],
-            [
-                'id' => 2,
-                'nama' => 'Canon 18-55mm',
-                'kategori' => 'Lensa',
-                'harga' => 30000,
-                'stok' => 8,
-                'deskripsi' => 'Lensa kit standar untuk kamera Canon DSLR',
-                'gambar' => 'images/camera.png'
-            ],
-            [
-                'id' => 3,
-                'nama' => 'Sony A7 III',
-                'kategori' => 'Kamera',
-                'harga' => 250000,
-                'stok' => 3,
-                'deskripsi' => 'Kamera mirrorless full-frame dengan autofocus cepat',
-                'gambar' => 'images/camera.png'
-            ],
-            [
-                'id' => 4,
-                'nama' => 'Tripod Manfrotto',
-                'kategori' => 'Aksesoris',
-                'harga' => 50000,
-                'stok' => 10,
-                'deskripsi' => 'Tripod kokoh untuk berbagai jenis kamera',
-                'gambar' => 'images/camera.png'
-            ],
-            [
-                'id' => 5,
-                'nama' => 'Godox TT685',
-                'kategori' => 'Lighting',
-                'harga' => 75000,
-                'stok' => 6,
-                'deskripsi' => 'Flash eksternal dengan TTL dan mode HSS',
-                'gambar' => 'images/camera.png'
-            ],
-        ];
-
-        return view('pengelolaan', compact('username','catalogItems'));
+        return view('riwayatAdmin', compact('username', 'rentalHistory'));
     }
 }
+
+// public function profile

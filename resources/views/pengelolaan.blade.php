@@ -18,7 +18,7 @@
                 </svg>
                 <span>Pengelolaan</span>
             </a>
-            <a href="#" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
+            <a href="{{ route ('riwayatAdmin', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
@@ -39,12 +39,14 @@
                     <h1 class="text-2xl font-bold">Pengelolaan Katalog</h1>
                     <p class="text-gray-600">Kelola item yang tersedia untuk disewa</p>
                 </div>
-                <button class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-md mt-4 md:mt-0 flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    Tambah Item
-                </button>
+                {{-- <a href="{{ route('tambahProduk') }}"> --}}
+                    <button class="bg-primary hover:bg-secondary text-white px-4 py-2 rounded-md mt-4 md:mt-0 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                        Tambah Item
+                    </button>
+                {{-- </a> --}}
             </div>
 
             <div class="bg-white rounded-lg shadow-md p-6 mb-8">
@@ -132,3 +134,7 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+@endsection

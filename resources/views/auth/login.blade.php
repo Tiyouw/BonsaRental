@@ -8,7 +8,7 @@
         <div>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Sewa perlengkapan fotografi dengan mudah</h1>
             <p class="text-xl text-white mb-8">Kami menyediakan segala kebutuhan yang anda butuhkan.</p>
-            <a href="{{ route('login') }}" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">Daftar Sekarang!</a>
+            <a href="{{ route('register') }}" class="bg-white text-primary hover:bg-light px-8 py-3 rounded-md text-lg font-medium">Daftar Sekarang!</a>
             <div class="mt-12">
                 <div class="flex items-center">
                     <div class="mr-4">
@@ -39,7 +39,7 @@
                 </div>
                 <button type="submit" class="w-full py-3 bg-primary text-white font-medium rounded-md hover:bg-secondary transition-colors">Masuk</button>
             </form>
-            <p class="text-center mt-6">New to BonsaRental? <a href="#" class="text-primary hover:underline">Daftar</a></p>
+            <p class="text-center mt-6">New to BonsaRental? <a href="register" class="text-primary hover:underline">Daftar</a></p>
         </div>
     </div>
 </div>

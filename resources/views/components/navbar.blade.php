@@ -17,13 +17,14 @@
                 @if(request()->routeIs('landing'))
                     <div class="relative group">
                         <a href="{{ route('login') }}" class="text-black hover:text-light px-3 py-2 mx-2">Masuk</a>
-                        <a href="#" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
+                        <a href="{{ route('register')}}" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
                     </div>
                 @else
-                    <a href="{{ route('dashboard', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
-                    <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
-                    <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
+                    <a href="{{ route('dashboardPelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Beranda</a>
+                    <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
+                    <a href="{{ route('profilePelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                 @endif
+
             </div>
         </div>
     </div>
@@ -40,9 +41,9 @@
                 <a href="{{ route('login') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Masuk</a>
                 <a href="#" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
             @else
-                <a href="{{ route('dashboard', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
-                <a href="{{ route('pengelolaan', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
-                <a href="{{ route('profile', ['username' => $username ?? 'Pengguna']) }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
+                <a href="{{ route('dashboardPelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Beranda</a>
+                <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
+                <a href="{{ route('profilePelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
             @endif
         </div>
     </div>
