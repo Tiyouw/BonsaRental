@@ -10,19 +10,19 @@ class ProfilController extends Controller
 {
     public function show()
     {
-        $user = Auth::user();
+        $user = \App\Models\User::find(Auth::id());
         return view('pelanggan.profilePelanggan', compact('user'));
     }
 
     public function profilePelanggan(Request $request)
     {
-        $user = Auth::user();
+        $user = \App\Models\User::find(Auth::id());
         return view('pelanggan.profilePelanggan', compact('user'));
     }
 
     public function edit()
     {
-        $user = Auth::user();
+        $user = \App\Models\User::find(Auth::id());
         return view('pelanggan.EditProfil', compact('user'));
     }
 
@@ -37,24 +37,23 @@ class ProfilController extends Controller
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:20000',
         ]);
 
-        $user = Auth::user();
+        $user = \App\Models\User::find(Auth::id());
 
         if ($request->hasFile('gambar')) {
             if ($user->gambar && Storage::disk('public')->exists($user->gambar)) {
                 Storage::disk('public')->delete($user->gambar);
-            }
+            }   
 
             $user->gambar = $request->file('gambar')->store('gambar_profile', 'public');
         }
 
-        $user->update([
-            'username' => $request->username,
-            'nama_lengkap' => $request->nama_lengkap,
-            'email' => $request->email,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'gambar' => $request->gambar,
-        ]);
+        $user->username = $request->username;
+        $user->nama_lengkap = $request->nama_lengkap;
+        $user->email = $request->email;
+        $user->no_hp = $request->no_hp;
+        $user->alamat = $request->alamat;
+        $user->gambar = $user->gambar;
+        $user->save();
 
         return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
@@ -82,26 +81,30 @@ class ProfilController extends Controller
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:20000',
         ]);
 
-        $user = Auth::user();
+        $user = \App\Models\User::find(Auth::id());
 
         if ($request->hasFile('gambar')) {
-            if ($user->gambar && Storage::disk('public')->exists($user->gambar)) {
+            if ($user && $user->gambar && Storage::disk('public')->exists($user->gambar)) {
                 Storage::disk('public')->delete($user->gambar);
             }
 
-            $user->gambar = $request->file('gambar')->store('gambar_profile', 'public');
+            if ($user) {
+                $user->gambar = $request->file('gambar')->store('gambar_profile', 'public');
+            }
         }
 
-        $user->update([
-            'username' => $request->username,
-            'nama_lengkap' => $request->nama_lengkap,
-            'email' => $request->email,
-            'no_hp' => $request->no_hp,
-            'alamat' => $request->alamat,
-            'gambar' => $user->gambar,
-        ]);
-
-        return redirect()->route('admin.profile')->with('success', 'Profil admin berhasil diperbarui.');
+        if ($user) {
+            $user->username = $request->username;
+            $user->nama_lengkap = $request->nama_lengkap;
+            $user->email = $request->email;
+            $user->no_hp = $request->no_hp;
+            $user->alamat = $request->alamat;
+            $user->gambar = $user->gambar;
+            $user->save();
+            return redirect()->route('admin.profile')->with('success', 'Profil admin berhasil diperbarui.');
+        } else {
+            return redirect()->back()->with('error', 'User tidak ditemukan.');
+        }
     }
 
 }
