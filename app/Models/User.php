@@ -17,12 +17,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'email',
+        'username',
         'password',
         'nama_lengkap',
         'no_hp',
         'alamat',
         'role',
+        'gambar',
     ];
 
     /**
@@ -41,7 +42,6 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
 
@@ -59,5 +59,23 @@ class User extends Authenticatable
     public function isCustomer(): bool
     {
         return $this->role === 'customer';
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return 'username';
+    }
+
+    /**
+     * Get user's bookings
+     */
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
     }
 }

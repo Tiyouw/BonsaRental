@@ -38,8 +38,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Email atau password yang dimasukkan salah.',
-        ])->onlyInput('email');
+            'username' => 'Username atau password yang dimasukkan salah.',
+        ])->onlyInput('username');
     }
 
     /**
@@ -94,7 +94,7 @@ class AuthController extends Controller
     {
         $data = $request->validate([
             'nama_lengkap' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . Auth::id()],
+            'username' => ['required', 'string', 'max:255', 'unique:users,username,' . Auth::id()],
             'no_hp' => ['required', 'string', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10', 'max:15'],
             'alamat' => ['required', 'string'],
             'current_password' => ['nullable', 'required_with:new_password'],
@@ -114,6 +114,12 @@ class AuthController extends Controller
         // Remove password fields from data before update
         unset($data['current_password']);
         unset($data['new_password']);
+
+        // Handle file upload if provided
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('public/profile-photos');
+            $data['gambar'] = str_replace('public/', '', $path);
+        }
 
         $user->update($data);
 

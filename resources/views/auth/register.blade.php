@@ -23,21 +23,27 @@
             @csrf
 
             <div class="rounded-md shadow-sm space-y-4">
-                <!-- Email -->
+                <!-- Username -->
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                    <input id="email" name="email" type="email" required 
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
-                        value="{{ old('email') }}"
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input id="username" name="username" type="text" required 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('username') border-red-500 @enderror" 
+                        value="{{ old('username') }}"
                     >
+                    @error('username')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Password -->
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                     <input id="password" name="password" type="password" required 
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('password') border-red-500 @enderror"
                     >
+                    @error('password')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Confirm Password -->
@@ -52,26 +58,35 @@
                 <div>
                     <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
                     <input id="nama_lengkap" name="nama_lengkap" type="text" required 
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('nama_lengkap') border-red-500 @enderror" 
                         value="{{ old('nama_lengkap') }}"
                     >
+                    @error('nama_lengkap')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- No HP -->
                 <div>
                     <label for="no_hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
                     <input id="no_hp" name="no_hp" type="text" required 
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm" 
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('no_hp') border-red-500 @enderror" 
                         value="{{ old('no_hp') }}"
                     >
+                    @error('no_hp')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <!-- Alamat -->
                 <div>
                     <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat</label>
                     <textarea id="alamat" name="alamat" rows="3" required 
-                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
+                        class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('alamat') border-red-500 @enderror"
                     >{{ old('alamat') }}</textarea>
+                    @error('alamat')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 

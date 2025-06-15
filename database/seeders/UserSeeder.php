@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     {
         // Create admin user
         User::create([
-            'email' => 'admin@example.com',
+            'username' => 'admin',
             'password' => Hash::make('password123'),
             'role' => 'admin',
             'nama_lengkap' => 'Administrator',
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
         // Create sample customers
         $customers = [
             [
-                'email' => 'john@example.com',
+                'username' => 'johndoe',
                 'password' => Hash::make('password123'),
                 'role' => 'customer',
                 'nama_lengkap' => 'John Doe',
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
                 'alamat' => 'Jl. Sudirman No. 123, Jakarta'
             ],
             [
-                'email' => 'jane@example.com',
+                'username' => 'janesmith',
                 'password' => Hash::make('password123'),
                 'role' => 'customer',
                 'nama_lengkap' => 'Jane Smith',
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
                 'alamat' => 'Jl. Thamrin No. 456, Jakarta'
             ],
             [
-                'email' => 'alice@example.com',
+                'username' => 'alicejohnson',
                 'password' => Hash::make('password123'),
                 'role' => 'customer',
                 'nama_lengkap' => 'Alice Johnson',
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
                 'alamat' => 'Jl. Gatot Subroto No. 789, Jakarta'
             ],
             [
-                'email' => 'bob@example.com',
+                'username' => 'bobwilson',
                 'password' => Hash::make('password123'),
                 'role' => 'customer',
                 'nama_lengkap' => 'Bob Wilson',

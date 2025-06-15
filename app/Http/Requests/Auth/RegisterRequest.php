@@ -15,12 +15,12 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => [
+            'username' => [
                 'required',
                 'string',
-                'email',
                 'max:255',
-                'unique:users'
+                'unique:users',
+                'alpha_dash'
             ],
             'password' => [
                 'required',
@@ -44,9 +44,9 @@ class RegisterRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Email harus diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'email.unique' => 'Email sudah terdaftar.',
+            'username.required' => 'Username harus diisi.',
+            'username.unique' => 'Username sudah digunakan.',
+            'username.alpha_dash' => 'Username hanya boleh berisi huruf, angka, dash (-) dan underscore (_).',
             'password.required' => 'Password harus diisi.',
             'password.confirmed' => 'Konfirmasi password tidak cocok.',
             'password.min' => 'Password minimal 8 karakter.',
@@ -62,7 +62,7 @@ class RegisterRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'email' => 'Email',
+            'username' => 'Username',
             'password' => 'Password',
             'nama_lengkap' => 'Nama Lengkap',
             'no_hp' => 'Nomor HP',
