@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Customer\DashboardPelanggan;
 use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\KategoriController as Kategori;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,10 @@ Route::get('/login', [PageController::class, 'login'])->name('login');
 Route::post('/login', [PageController::class, 'submitLogin'])->name('login.submit');
 
 // DASHBOARD
-Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-Route::get('/dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('dashboardPelanggan');
+// routes/web.php
+Route::get('/dashboardPelanggan', [DashboardPelanggan::class, 'dashboardPelanggan'])
+    ->name('customer.dashboard')
+    ->middleware('auth');
 
 // PRODUK
 Route::get('/detailProduk/{id}', [PageController::class, 'detailProduk'])->name('detailProduk');

@@ -7,17 +7,16 @@ use Illuminate\Support\Facades\Schema;
 class CreateKategoriProdukTable extends Migration
 {
     public function up()
-    {
-        Schema::create('kategori_produk', function (Blueprint $table) {
-            $table->id('id_kategori');
-            $table->string('nama_kategori');
-            $table->enum('status', ['aktif', 'non-aktif'])->default('aktif');
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('kategori_produk', function (Blueprint $table) {
+        $table->id('id_kategori');
+        $table->string('nama_kategori');
+        $table->timestamps();
+    });
+}
 
-    public function down()
-    {
-        Schema::dropIfExists('kategori_produk');
-    }
+public function down()
+{
+    Schema::dropIfExists('kategori_produk');
+}  
 }

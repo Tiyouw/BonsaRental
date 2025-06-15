@@ -57,12 +57,6 @@ class PageController extends Controller
         return view('dashboard', compact('username', 'rentalHistory'));
     }
 
-    public function dashboardPelanggan()
-    {
-        $username = session('username', 'Pelanggan');
-        $catalogItems = $this->catalogItems; // pakai data dummy property
-        return view('dashboardPelanggan', compact('username', 'catalogItems'));
-    }
 
     public function detailProduk($id)
     {

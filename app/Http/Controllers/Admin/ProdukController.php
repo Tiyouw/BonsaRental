@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Produk; // Pastikan import model dengan benar
-use App\Models\Kategori; // Import model kategori
+use App\Models\Produk;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller {
     public function index() {
         $produks = Produk::with('kategori')->paginate(10);
-        return view('admin.produk.index', compact('produks'));
+        return view('admin.pengelolaan', compact('produks'));
     }
 
     public function create() {
         $kategoris = Kategori::all();
-        return view('admin.produk.create', compact('kategoris'));
+        return view('admin.pengelolaan', compact('kategoris'));
     }
 
     public function store(Request $request) {
@@ -34,8 +34,6 @@ class ProdukController extends Controller {
         }
 
         Produk::create($validatedData);
-        return redirect()->route('admin.produk.index')->with('success', 'Produk berhasil ditambahkan');
+        return redirect()->route('admin.pengelolaan')->with('success', 'Produk berhasil ditambahkan');
     }
-
-    // Metode edit, update, dan destroy akan kita bahas selanjutnya
 }
