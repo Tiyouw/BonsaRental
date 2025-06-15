@@ -69,6 +69,18 @@ Route::middleware('auth')->group(function () {
             return redirect()->route('admin.dashboard');
         });
 
+        // Admin Profile
+        Route::get('/profile', function () {
+            return view('admin.profile');
+        })->name('admin.profile');
+
+        Route::get('/profile/edit', function () {
+            return view('admin.EditProfileAdmin');
+        })->name('admin.profile.edit');
+        
+        Route::put('/profile/update', [App\Http\Controllers\Admin\UserController::class, 'updateProfile'])
+            ->name('admin.profile.update');
+
         // Riwayat Admin
         Route::get('/riwayat', function () {
             return view('admin.riwayatAdmin');

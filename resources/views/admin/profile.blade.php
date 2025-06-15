@@ -24,7 +24,7 @@
                 </svg>
                 <span>Riwayat</span>
             </a>
-            <a href="{{ route('profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
+            <a href="{{ route('admin.profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -76,7 +76,7 @@
                                     Logout
                                 </button>
                             </form>
-                            <a href="{{ route('profile') }}"
+                            <a href="{{ route('admin.profile.edit') }}"
                                class="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">
                                 Edit Profil
                             </a>

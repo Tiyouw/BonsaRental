@@ -24,7 +24,7 @@
                 </svg>
                 <span>Riwayat</span>
             </a>
-            <a href="{{ route('profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
+            <a href="{{ route('admin.profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
                 <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                 </svg>
@@ -52,7 +52,7 @@
 
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="max-w-2xl mx-auto">
-                    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -116,7 +116,7 @@
                         </div>
 
                         <div class="flex justify-end gap-4 mt-6">
-                            <a href="{{ route('profile') }}"
+                            <a href="{{ route('admin.profile') }}"
                                class="py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700">
                                 Batal
                             </a>
@@ -141,7 +141,7 @@
         </div>
         <h2 class="text-xl font-semibold mb-2">Profil berhasil diperbarui!</h2>
         <p class="text-gray-600 mb-4">{{ session('success') }}</p>
-        <button onclick="window.location.href='{{ route('profile') }}'"
+        <button onclick="window.location.href='{{ route('admin.profile') }}'"
                 class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full transition duration-200">
             OK
         </button>
