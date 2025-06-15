@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\admin\PengelolaanController;
+use App\Http\Controllers\admin\ProdukController;
+use App\Http\Controllers\admin\KategoriController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +21,12 @@ Route::get('auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('auth/login', [AuthController::class, 'submitLogin'])->name('login.submit');
 
 // DASHBOARD
-Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-Route::get('dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('dashboardPelanggan');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    ->name('admin.dashboard')
+    ->middleware('auth');
+
+// Route::get('dashboard', [PageController::class, 'dashboard'])->name('dashboard');
+// Route::get('dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('dashboardPelanggan');
 
 Route::get('/admin/dashboard', [PageController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/pelanggan/dashboardPelanggan', [PageController::class, 'dashboardPelanggan'])->name('pelanggan.dashboardPelanggan');
@@ -42,11 +50,21 @@ Route::put('/admin/profile/update', [ProfilController::class, 'updateAdmin'])->n
 
 // RIWAYAT
 Route::get('/riwayat', [PageController::class, 'riwayatBooking'])->name('riwayatBooking');
-Route::get('/riwayatAdmin', [PageController::class, 'riwayatAdmin'])->name('riwayatAdmin');
+Route::get('admin/riwayatAdmin', [PageController::class, 'riwayatAdmin'])->name('admin.riwayatAdmin');
 
 
-// PENGELOLAAN
-Route::get('/pengelolaan', [PageController::class, 'pengelolaan'])->name('pengelolaan');
+// // PENGELOLAAN
+// Route::get('admin/pengelolaan', [ProdukController::class, 'index'])->name('admin.pengelolaan');
 
 // LOGOUT
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('logout');
+
+// routes/web.php
+Route::prefix('admin')->group(function() {
+    Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
+    Route::get('/pengelolaan/tambah', [PengelolaanController::class, 'create'])->name('pengelolaan.create');
+    Route::post('/pengelolaan', [PengelolaanController::class, 'store'])->name('pengelolaan.store');
+    Route::get('/pengelolaan/{id}/edit', [PengelolaanController::class, 'edit'])->name('pengelolaan.edit');
+    Route::put('/pengelolaan/{id}', [PengelolaanController::class, 'update'])->name('pengelolaan.update');
+    Route::delete('/pengelolaan/{id}', [PengelolaanController::class, 'destroy'])->name('pengelolaan.destroy');
+});

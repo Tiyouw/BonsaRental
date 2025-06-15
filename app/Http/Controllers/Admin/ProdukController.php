@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 
 class ProdukController extends Controller {
     public function index() {
-        $produks = Produk::with('kategori')->paginate(10);
-        return view('admin.pengelolaan', compact('produks'));
+        $produk = Produk::with('kategori')->paginate(10);
+        return view('admin.pengelolaan', compact('produk'));
     }
 
     public function create() {
-        $kategoris = Kategori::all();
-        return view('admin.pengelolaan', compact('kategoris'));
+        $kategori = Kategori::all();
+        return view('admin.pengelolaan', compact('kategori'));
     }
 
     public function store(Request $request) {

@@ -3,7 +3,8 @@
 @section('title', 'Pengelolaan Katalog - BonsaRental')
 
 @section('content')
-<div class="flex mt-16">
+@section('sidebar')
+{{-- <div class="flex mt-16">
     <div class="hidden md:block w-64 bg-dark min-h-screen fixed">
         <div class="flex flex-col">
             <a href="{{ route('dashboard', ['username' => $username]) }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
@@ -31,7 +32,7 @@
                 <span>Profile</span>
             </a>
         </div>
-    </div>
+    </div> --}}
     <div class="w-full md:ml-64 px-4 py-8">
         <div class="container mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
