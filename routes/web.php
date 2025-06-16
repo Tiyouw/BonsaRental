@@ -5,6 +5,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KatalogController;
 use App\Http\Controllers\Admin\PengelolaanController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 // Landing page route
@@ -15,22 +16,18 @@ Route::get('/', function () {
 // Guest routes
 Route::middleware('guest')->group(function () {
     // Login
-    Route::get('auth/login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('auth/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
     // Register
-    Route::get('auth/register', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('auth/register', [AuthController::class, 'register'])->name('register.submit');
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 });
 
 // Authenticated routes
 Route::middleware('auth')->group(function () {
     // Logout
-    Route::post('auth/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // Profile for all users
-    Route::get('/profile', [AuthController::class, 'showProfile'])->name('profile');
-    Route::put('/profile', [AuthController::class, 'updateProfile'])->name('profile.update');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     // Customer routes
     Route::middleware('customer')->group(function () {
@@ -60,9 +57,7 @@ Route::middleware('auth')->group(function () {
     // Admin routes
     Route::prefix('admin')->middleware('admin')->group(function () {
         // Dashboard
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+        Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
 
         // Set dashboard as home for admin
         Route::get('/', function () {

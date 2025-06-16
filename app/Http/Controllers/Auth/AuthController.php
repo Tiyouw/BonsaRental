@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+
+
 
 class AuthController extends Controller
 {
@@ -25,9 +28,8 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validated();
-
-        if (Auth::attempt($credentials)) {
+        try {
+            $request->authenticate();
             $request->session()->regenerate();
 
             if (Auth::user()->isAdmin()) {
@@ -35,11 +37,11 @@ class AuthController extends Controller
             }
 
             return redirect()->route('katalog');
+        } catch (ValidationException $e) {
+            return back()->withErrors([
+                'username' => 'Username atau password yang dimasukkan salah.',
+            ])->onlyInput('username');
         }
-
-        return back()->withErrors([
-            'username' => 'Username atau password yang dimasukkan salah.',
-        ])->onlyInput('username');
     }
 
     /**
