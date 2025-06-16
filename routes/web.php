@@ -31,18 +31,14 @@ Route::middleware('auth')->group(function () {
 
     // Customer routes
     Route::middleware('customer')->group(function () {
-        // Dashboard
-        Route::get('/dashboard', function () {
-            return view('pelanggan.dashboardPelanggan');
-        })->name('dashboardPelanggan');
+        // Dashboard & Katalog
+        Route::get('/dashboard', [KatalogController::class, 'index'])->name('dashboardPelanggan');
+        Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
 
         // Profile
         Route::get('/profile/pelanggan', function () {
             return view('pelanggan.profilePelanggan');
         })->name('profilePelanggan');
-
-        // Katalog & Booking
-        Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
         Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
         
         // Booking routes

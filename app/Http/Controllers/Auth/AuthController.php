@@ -35,7 +35,7 @@ class AuthController extends Controller
                 return redirect()->route('admin.dashboard');
             }
 
-            return redirect()->route('katalog');
+            return redirect()->route('dashboardPelanggan');
         } catch (ValidationException $e) {
             return back()->withErrors([
                 'username' => 'Username atau password yang dimasukkan salah.',
