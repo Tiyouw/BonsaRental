@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function profile()
+    {
+        $user = auth()->user();
+        return view('admin.profile', compact('user'));
+    }
+
+    public function editProfile()
+    {
+        $user = auth()->user();
+        return view('admin.EditProfileAdmin', compact('user'));
+    }
+
     public function updateProfile(Request $request)
     {
         $user = auth()->user();

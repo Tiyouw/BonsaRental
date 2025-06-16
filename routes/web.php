@@ -65,16 +65,9 @@ Route::middleware('auth')->group(function () {
         });
 
         // Admin Profile
-        Route::get('/profile', function () {
-            return view('admin.profile');
-        })->name('admin.profile');
-
-        Route::get('/profile/edit', function () {
-            return view('admin.EditProfileAdmin');
-        })->name('admin.profile.edit');
-        
-        Route::put('/profile/update', [App\Http\Controllers\Admin\UserController::class, 'updateProfile'])
-            ->name('admin.profile.update');
+        Route::get('/profile', [App\Http\Controllers\Admin\UserController::class, 'profile'])->name('admin.profile');
+        Route::get('/profile/edit', [App\Http\Controllers\Admin\UserController::class, 'editProfile'])->name('admin.profile.edit');
+        Route::put('/profile/update', [App\Http\Controllers\Admin\UserController::class, 'updateProfile'])->name('admin.profile.update');
 
         // Riwayat Admin
         Route::get('/riwayat', function () {
