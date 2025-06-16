@@ -2,8 +2,8 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center h-16">
             <a href="{{ auth()->check() ? (auth()->user()->isAdmin() ? route('admin.dashboard') : route('katalog')) : route('login') }}" class="flex items-center">
-                <img src="{{ asset('images/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
-            </a>
+    <img src="{{ asset('images/bonsa-logo.png') }}" alt="Bonsa Rental" class="h-8 w-auto">
+</a>
 
             <div class="md:hidden">
                 <button type="button" class="text-black hover:text-light focus:outline-none" id="mobile-menu-button">

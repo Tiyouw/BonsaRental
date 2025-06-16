@@ -26,7 +26,7 @@ class PengelolaanController extends Controller
         // Ambil kategori untuk dropdown filter
         $kategori = Kategori::all();
 
-        return view('pengelolaan.index', [
+        return view('admin.pengelolaan', [
             'catalogItems' => $catalogItems,
             'kategori' => $kategori
         ]);

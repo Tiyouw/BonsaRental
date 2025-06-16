@@ -16,7 +16,7 @@ Route::middleware('guest')->group(function () {
     })->name('landing');
 
     // Login
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('login.submit');
 
     // Register
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
             return view('pelanggan.profilePelanggan');
         })->name('profilePelanggan');
         Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
-        
+
         // Booking routes
         Route::get('/booking/{id}', [BookingController::class, 'form'])->name('booking.form');
         Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
