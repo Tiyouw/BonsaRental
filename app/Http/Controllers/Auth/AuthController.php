@@ -10,8 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -32,7 +31,7 @@ class AuthController extends Controller
             $request->authenticate();
             $request->session()->regenerate();
 
-            if (Auth::user()->isAdmin()) {
+            if (Auth::user()->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
 
