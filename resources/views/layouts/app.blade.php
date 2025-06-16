@@ -40,14 +40,16 @@
                         </div>
                     @else
                         @auth
-                            @if(Auth::user()->isAdmin())
+                            @if(Auth::user()->role === 'admin')
                                 <a href="{{ route('admin.dashboard') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
-                                <a href="{{ route('pengelolaan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
+                                <a href="{{ route('pengelolaan.index') }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
+                                <a href="{{ route('admin.profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                             @else
+                                <a href="{{ route('dashboardPelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
                                 <a href="{{ route('katalog') }}" class="text-black hover:text-light px-3 py-2 mx-2">Katalog</a>
                                 <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
+                                <a href="{{ route('profilePelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                             @endif
-                            <a href="{{ route('profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                             <form action="{{ route('logout') }}" method="POST" class="inline">
                                 @csrf
                                 <button type="submit" class="text-black hover:text-light px-3 py-2 mx-2">Logout</button>
@@ -71,14 +73,16 @@
                     <a href="{{ route('register') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
                 @else
                     @auth
-                        @if(Auth::user()->isAdmin())
+                        @if(Auth::user()->role === 'admin')
                             <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
-                            <a href="{{ route('pengelolaan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
+                            <a href="{{ route('pengelolaan.index') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
+                            <a href="{{ route('admin.profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
                         @else
+                            <a href="{{ route('dashboardPelanggan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
                             <a href="{{ route('katalog') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Katalog</a>
                             <a href="{{ route('riwayatBooking') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Riwayat</a>
+                            <a href="{{ route('profilePelanggan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
                         @endif
-                        <a href="{{ route('profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" class="block w-full text-left px-3 py-2 text-white hover:bg-primary/50 rounded-md">Logout</button>
