@@ -8,13 +8,13 @@ use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-// Landing page route
-Route::get('/', function () {
-    return view('landing');
-})->name('landing');
-
-// Guest routes
+// Guest routes (including landing)
 Route::middleware('guest')->group(function () {
+    // Landing page
+    Route::get('/', function () {
+        return view('landing');
+    })->name('landing');
+
     // Login
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'authenticate'])->name('login.submit');

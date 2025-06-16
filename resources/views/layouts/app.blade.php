@@ -33,7 +33,7 @@
                 </div>
 
                 <div class="hidden md:flex md:items-center">
-                    @if(request()->routeIs('landing'))
+                    @guest
                         <div class="relative group">
                             <a href="{{ route('login') }}" class="text-black hover:text-light px-3 py-2 mx-2">Masuk</a>
                             <a href="{{ route('register') }}" class="bg-white text-primary hover:bg-light px-3 py-2 rounded-md ml-2">Daftar</a>
@@ -68,12 +68,11 @@
                 <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Lighting</a>
                 <a href="#" class="block px-3 py-2 ml-4 text-white hover:bg-primary/50 rounded-md">Aksesoris</a>
 
-                @if(request()->routeIs('landing'))
+                @guest
                     <a href="{{ route('login') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Masuk</a>
                     <a href="{{ route('register') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Daftar</a>
                 @else
-                    @auth
-                        @if(Auth::user()->role === 'admin')
+                    @if(Auth::user()->role === 'admin')
                             <a href="{{ route('admin.dashboard') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
                             <a href="{{ route('pengelolaan.index') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
                             <a href="{{ route('admin.profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
