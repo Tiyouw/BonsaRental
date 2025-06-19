@@ -4,34 +4,7 @@
 
 @section('content')
 <div class="flex">
-    <div class="hidden md:block w-64 bg-dark min-h-screen fixed">
-        <div class="flex flex-col">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center text-white bg-primary px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                <span>Dashboard</span>
-            </a>
-            <a href="{{ route('pengelolaan.index') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span>Pengelolaan</span>
-            </a>
-            <a href="{{ route('admin.bookings.index') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span>Riwayat</span>
-            </a>
-            <a href="{{ route('admin.profile') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                <span>Profile</span>
-            </a>
-        </div>
-    </div>
+    <x-admin_sidebar />
 
     <div class="w-full md:ml-64 px-4 py-8">
         <div class="container mx-auto">
@@ -44,15 +17,34 @@
                     <button class="mr-4 p-2 border rounded-md">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
                     </button>
-                    <div class="flex items-center">
-                        <img src="images/comot.png" alt="Profile" class="w-10 h-10 rounded-full">
-                        <div class="ml-3">
-                            <h6 class="font-medium">{{ $user->nama_lengkap }}</h6>
-                            <svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
+                    @php
+        $initials = '';
+        if ($user->nama_lengkap) {
+            $nameParts = explode(' ', $user->nama_lengkap);
+            // Ambil huruf pertama dari nama depan
+            $initials .= strtoupper(substr($nameParts[0], 0, 1));
+            // Jika ada lebih dari satu kata, ambil huruf pertama dari kata terakhir
+            if (count($nameParts) > 1) {
+                $initials .= strtoupper(substr($nameParts[count($nameParts) - 1], 0, 1));
+            }
+        } else {
+            // Fallback jika nama_lengkap juga kosong (misal: "AD" untuk Admin Dashboard)
+            $initials = 'AD';
+        }
+    @endphp
+    <a href="{{ route('admin.profile') }}">
+
+
+    @if($user->gambar)
+        {{-- Jika user memiliki gambar profil, tampilkan gambar tersebut --}}
+        <img src="{{ asset('storage/' . $user->gambar) }}" alt="Profile" class="w-10 h-10 rounded-full object-cover">
+    @else
+        {{-- Jika tidak ada gambar profil, tampilkan inisial --}}
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white text-sm font-bold">
+            {{ $initials }}
+        </div>
+    @endif
+    </a>
                 </div>
             </div>
 
@@ -60,24 +52,24 @@
                 <div class="bg-primary rounded-lg overflow-hidden text-white">
                     <div class="p-6 flex flex-col md:flex-row justify-between h-full">
                         <div class="mb-4 md:mb-0 md:w-2/3">
-                            <h3 class="text-xl font-semibold mb-3">Sewa Perlengkapan Fotografi</h3>
-                            <p class="mb-4">Mulai dari Rp 50.000/hari aja!</p>
-                            <a href="#" class="inline-block bg-white text-primary hover:bg-light px-4 py-2 rounded-md">Cek sekarang</a>
+                            <h3 class="text-xl font-semibold mb-3">Kelola Perlengkapan Fotografi</h3>
+                            <p class="mb-4">Jangan lupa cek barang/stok di lemari!</p>
+                            <a href="{{route('pengelolaan.index')}}" class="inline-block bg-white text-primary hover:bg-light px-4 py-2 rounded-md">Lihat Sekarang</a>
                         </div>
                         <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
+                            <img src="/images/lens.png" alt="Camera Lens" class="h-32 object-contain">
                         </div>
                     </div>
                 </div>
                 <div class="bg-accent rounded-lg overflow-hidden text-gray-800">
                     <div class="p-6 flex flex-col md:flex-row justify-between h-full">
                         <div class="mb-4 md:mb-0 md:w-2/3">
-                            <h3 class="text-xl font-semibold mb-3">Sewa Perlengkapan Fotografi</h3>
-                            <p class="mb-4">Mulai dari Rp 50.000/hari aja!</p>
-                            <a href="#" class="inline-block bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 rounded-md">Cek sekarang</a>
+                            <h3 class="text-xl font-semibold mb-3">Pelanggan BonsaRental</h3>
+                            <p class="mb-4">Lihat Data pelanggan Bonsa Rental</p>
+                            <a href="#" class="inline-block bg-gray-800 text-white hover:bg-gray-700 px-4 py-2 rounded-md">Lihat sekarang!</a>
                         </div>
                         <div class="md:w-1/3 flex justify-center md:justify-end">
-                            <img src="images/lens.png" alt="Camera Lens" class="h-32 object-contain">
+                            <img src="/images/lens.png" alt="Camera Lens" class="h-32 object-contain">
                         </div>
                     </div>
                 </div>

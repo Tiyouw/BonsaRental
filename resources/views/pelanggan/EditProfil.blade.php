@@ -17,7 +17,7 @@
         </div>
         @endif
 
-        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('profilePelanggan.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -29,25 +29,19 @@
             <div class="space-y-4">
                 <div>
                     <label class="text-gray-600">Nama Lengkap</label>
-                    <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" 
+                    <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
                            class="w-full px-4 py-2 border rounded-md @error('nama_lengkap') border-red-500 @enderror" required>
                 </div>
 
                 <div>
-                    <label class="text-gray-600">Email</label>
-                    <input type="email" name="email" value="{{ old('email', $user->email) }}" 
-                           class="w-full px-4 py-2 border rounded-md @error('email') border-red-500 @enderror" required>
-                </div>
-
-                <div>
                     <label class="text-gray-600">No HP</label>
-                    <input type="text" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}" 
+                    <input type="text" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
                            class="w-full px-4 py-2 border rounded-md @error('no_hp') border-red-500 @enderror" required>
                 </div>
 
                 <div>
                     <label class="text-gray-600">Alamat</label>
-                    <textarea name="alamat" rows="3" 
+                    <textarea name="alamat" rows="3"
                               class="w-full px-4 py-2 border rounded-md @error('alamat') border-red-500 @enderror" required>{{ old('alamat', $user->alamat) }}</textarea>
                 </div>
 
@@ -59,19 +53,19 @@
                     <div class="space-y-4">
                         <div>
                             <label class="text-gray-600">Password Saat Ini</label>
-                            <input type="password" name="current_password" 
+                            <input type="password" name="current_password"
                                    class="w-full px-4 py-2 border rounded-md @error('current_password') border-red-500 @enderror">
                         </div>
 
                         <div>
                             <label class="text-gray-600">Password Baru</label>
-                            <input type="password" name="new_password" 
+                            <input type="password" name="new_password"
                                    class="w-full px-4 py-2 border rounded-md @error('new_password') border-red-500 @enderror">
                         </div>
 
                         <div>
                             <label class="text-gray-600">Konfirmasi Password Baru</label>
-                            <input type="password" name="new_password_confirmation" 
+                            <input type="password" name="new_password_confirmation"
                                    class="w-full px-4 py-2 border rounded-md">
                         </div>
                     </div>

@@ -20,7 +20,7 @@ class BookingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.bookings.index', compact('bookings'));
+        return view('admin/riwayatAdmin', compact('bookings'));
     }
 
     public function show($id)
@@ -38,14 +38,14 @@ class BookingController extends Controller
         ]);
 
         $booking = Booking::findOrFail($id);
-        
+
         // If rejecting a booking that was previously approved, return products to stock
         if ($request->status_booking == 'ditolak' && $booking->status_booking == 'disetujui') {
             foreach ($booking->detailBookings as $detail) {
                 $detail->produk->increment('stock', $detail->jumlah);
             }
         }
-        
+
         // If approving a booking, check if products are still available
         if ($request->status_booking == 'disetujui' && $booking->status_booking == 'diproses') {
             foreach ($booking->detailBookings as $detail) {
@@ -94,7 +94,7 @@ class BookingController extends Controller
     public function destroy($id)
     {
         $booking = Booking::findOrFail($id);
-        
+
         // Return products to stock if booking was approved and items weren't returned
         if ($booking->status_booking == 'disetujui' && $booking->status_sewa != 'dikembalikan') {
             foreach ($booking->detailBookings as $detail) {

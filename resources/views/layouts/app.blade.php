@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'BonsaRental - Sewa Perlengkapan Fotografi')</title>
+    <link rel="icon" href="{{ asset('images/Logogram_BonsaRental_Purple.svg') }}" type="image/svg+xml" >
+
     @vite('resources/css/app.css')
     <style>
         @layer utilities {
@@ -44,7 +46,7 @@
                             <a href="{{ route('pengelolaan.index') }}" class="text-black hover:text-light px-3 py-2 mx-2">Pengelolaan</a>
                             <a href="{{ route('admin.profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                         @else {{-- User is a regular customer --}}
-                            <a href="{{ route('dashboardPelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a>
+                            {{-- <a href="{{ route('dashboardPelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Dashboard</a> --}}
                             <a href="{{ route('katalog') }}" class="text-black hover:text-light px-3 py-2 mx-2">Katalog</a>
                             <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
                             <a href="{{ route('profilePelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
@@ -76,7 +78,7 @@
                         <a href="{{ route('pengelolaan.index') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Pengelolaan</a>
                         <a href="{{ route('admin.profile') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>
                     @else {{-- User is a regular customer --}}
-                        <a href="{{ route('dashboardPelanggan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a>
+                        {{-- <a href="{{ route('dashboardPelanggan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Dashboard</a> --}}
                         <a href="{{ route('katalog') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Katalog</a>
                         <a href="{{ route('riwayatBooking') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Riwayat</a>
                         <a href="{{ route('profilePelanggan') }}" class="block px-3 py-2 text-white hover:bg-primary/50 rounded-md">Profil</a>

@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KatalogController;
+// use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\PengelolaanController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -31,20 +33,18 @@ Route::middleware('auth')->group(function () {
 
     // Customer routes
     Route::middleware('customer')->group(function () {
-        // Dashboard & Katalog
-        Route::get('/dashboard', [KatalogController::class, 'index'])->name('dashboardPelanggan');
+        // Katalog
         Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
 
         // Profile
-        Route::get('/profile/pelanggan', function () {
-            return view('pelanggan.profilePelanggan');
-        })->name('profilePelanggan');
+        Route::get('/profile/pelanggan', [ProfilController::class, 'show'])->name('profilePelanggan');
         Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
-
+        Route::get('/profile/edit', [ProfilController::class, 'edit'])->name('profilePelanggan.edit');
+        Route::put('/profile/update', [ProfilController::class, 'update'])->name('profilePelanggan.update');
         // Booking routes
         Route::get('/booking/{id}', [BookingController::class, 'form'])->name('booking.form');
         Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
-        Route::get('/booking/riwayat', [BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
+        Route::get('/riwayat', [BookingController::class, 'riwayatBooking'])->name('riwayatBooking');
         Route::get('/booking/detail/{id}', [BookingController::class, 'show'])->name('booking.show');
         Route::post('/booking/cancel/{id}', [BookingController::class, 'cancel'])->name('booking.cancel');
         Route::post('/booking/{id}/upload-bukti', [BookingController::class, 'uploadBukti'])->name('uploadBukti');
@@ -67,7 +67,8 @@ Route::middleware('auth')->group(function () {
 
         // Riwayat Admin
         Route::get('/riwayat', function () {
-            return view('admin.riwayatAdmin');
+            return view('admin.riwayat
+            Admin');
         })->name('admin.riwayatAdmin');
 
         // Pengelolaan routes

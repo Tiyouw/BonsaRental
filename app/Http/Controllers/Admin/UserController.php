@@ -25,12 +25,12 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = auth()->user();
-        
+
         $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'no_hp' => 'required|string|max:15',
-            'alamat' => 'required|string',
+            'nama_lengkap' => 'string|max:255',
+            'email' => 'email|unique:users,email,' . $user->id,
+            'no_hp' => 'string|max:15',
+            'alamat' => 'string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:8|confirmed',
@@ -42,7 +42,6 @@ class UserController extends Controller
         }
 
         $user->nama_lengkap = $validatedData['nama_lengkap'];
-        $user->email = $validatedData['email'];
         $user->no_hp = $validatedData['no_hp'];
         $user->alamat = $validatedData['alamat'];
 

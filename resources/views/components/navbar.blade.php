@@ -1,3 +1,6 @@
+<head>
+    
+</head>
 <nav class="fixed top-0 left-0 right-0 z-50 bg-primary/80 backdrop-blur-md border-b border-white/10 shadow-lg">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center h-16">
@@ -28,7 +31,7 @@
                     @else
                         <a href="{{ route('katalog') }}" class="text-black hover:text-light px-3 py-2 mx-2">Beranda</a>
                         <a href="{{ route('riwayatBooking') }}" class="text-black hover:text-light px-3 py-2 mx-2">Riwayat</a>
-                        <a href="{{ route('profile') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
+                        <a href="{{ route('profilePelanggan') }}" class="text-black hover:text-light px-3 py-2 mx-2">Profil</a>
                     @endif
                 @endguest
             </div>

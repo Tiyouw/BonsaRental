@@ -21,7 +21,7 @@ class BookingController extends Controller
     public function form($id)
     {
         $product = Produk::findOrFail($id);
-        
+
         if ($product->stock <= 0) {
             return redirect()->route('katalog')
                 ->with('error', 'Maaf, produk ini sedang tidak tersedia.');
@@ -98,7 +98,7 @@ class BookingController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('riwayatBooking', compact('bookings'));
+        return view('pelanggan/riwayatBooking', compact('bookings'));
     }
 
     public function show($id)

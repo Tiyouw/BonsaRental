@@ -29,11 +29,10 @@ class ProfilController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255',
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'no_hp' => 'required|string|max:20',
-            'alamat' => 'required|string|max:255',
+            'username' => 'string|max:255',
+            'nama_lengkap' => 'string|max:255',
+            'no_hp' => 'string|max:20',
+            'alamat' => 'string|max:255',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:20000',
         ]);
 
@@ -42,14 +41,13 @@ class ProfilController extends Controller
         if ($request->hasFile('gambar')) {
             if ($user->gambar && Storage::disk('public')->exists($user->gambar)) {
                 Storage::disk('public')->delete($user->gambar);
-            }   
+            }
 
             $user->gambar = $request->file('gambar')->store('gambar_profile', 'public');
         }
 
         $user->username = $request->username;
         $user->nama_lengkap = $request->nama_lengkap;
-        $user->email = $request->email;
         $user->no_hp = $request->no_hp;
         $user->alamat = $request->alamat;
         $user->gambar = $user->gambar;
@@ -73,11 +71,10 @@ class ProfilController extends Controller
     public function updateAdmin(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|max:255',
-            'nama_lengkap' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'no_hp' => 'required|string|max:20',
-            'alamat' => 'required|string|max:255',
+            'username' => 'string|max:255',
+            'nama_lengkap' => 'string|max:255',
+            'no_hp' => 'string|max:20',
+            'alamat' => 'string|max:255',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:20000',
         ]);
 
@@ -96,7 +93,6 @@ class ProfilController extends Controller
         if ($user) {
             $user->username = $request->username;
             $user->nama_lengkap = $request->nama_lengkap;
-            $user->email = $request->email;
             $user->no_hp = $request->no_hp;
             $user->alamat = $request->alamat;
             $user->gambar = $user->gambar;

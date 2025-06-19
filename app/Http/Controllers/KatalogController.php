@@ -11,10 +11,10 @@ class KatalogController extends Controller
     public function index(Request $request)
     {
         $categories = Kategori::all();
-        
+
         // Get selected category or default to first category
         $selectedCategoryId = $request->query('category', $categories->first()->id_kategori ?? null);
-        
+
         $category = null;
         $products = collect();
 
@@ -26,6 +26,6 @@ class KatalogController extends Controller
                 ->get();
         }
 
-        return view('katalog', compact('categories', 'category', 'products'));
+        return view('pelanggan/katalog', compact('categories', 'category', 'products'));
     }
 }

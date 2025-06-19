@@ -20,10 +20,10 @@
                 <input type="text" value="{{ $user->nama_lengkap }}" class="w-full px-4 py-2 bg-gray-100 border rounded-md" disabled>
             </div>
 
-            <div>
+            {{-- <div>
                 <label class="text-gray-600">Email</label>
                 <input type="text" value="{{ $user->email }}" class="w-full px-4 py-2 bg-gray-100 border rounded-md" disabled>
-            </div>
+            </div> --}}
 
             <div>
                 <label class="text-gray-600">No. Telepon</label>
@@ -39,13 +39,13 @@
         <div class="mt-6 flex justify-between">
             <form method="POST" action="{{ route('logout') }}" class="inline">
                 @csrf
-                <button type="submit" 
+                <button type="submit"
                     onclick="return confirm('Apakah Anda yakin ingin logout?')"
                     class="py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700">
                     Logout
                 </button>
             </form>
-            <a href="{{ route('profile') }}"
+            <a href="{{ route('profilePelanggan.edit') }}"
                class="py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700">
                 Edit Profil
             </a>

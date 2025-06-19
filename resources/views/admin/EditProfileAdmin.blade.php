@@ -4,34 +4,7 @@
 
 @section('content')
 <div class="flex">
-    <div class="hidden md:block w-64 bg-dark min-h-screen fixed">
-        <div class="flex flex-col">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                <span>Dashboard</span>
-            </a>
-            <a href="{{ route('pengelolaan.index') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
-                </svg>
-                <span>Pengelolaan</span>
-            </a>
-            <a href="{{ route('admin.bookings.index') }}" class="flex items-center text-white hover:bg-primary/50 px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span>Riwayat</span>
-            </a>
-            <a href="{{ route('admin.profile') }}" class="flex items-center text-white bg-primary px-4 py-4">
-                <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                <span>Profile</span>
-            </a>
-        </div>
-    </div>
+     <x-admin_sidebar />
 
     <div class="w-full md:ml-64 px-4 py-8">
         <div class="container mx-auto">
@@ -57,34 +30,28 @@
                         @method('PUT')
 
                         <div class="flex flex-col items-center mb-6">
-                            <img src="{{ $user->gambar ? asset('storage/' . $user->gambar) : asset('images/comot.png') }}" 
+                            <img src="{{ $user->gambar ? asset('storage/' . $user->gambar) : asset('images/comot.png') }}"
                                  class="w-24 h-24 rounded-full mb-4">
-                            <input type="file" name="gambar" 
+                            <input type="file" name="gambar"
                                    class="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-md file:text-sm file:bg-primary file:text-white hover:file:bg-primary/80" />
                         </div>
 
                         <div class="space-y-4">
                             <div>
                                 <label class="text-gray-600">Nama Lengkap</label>
-                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}" 
+                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
                                        class="w-full px-4 py-2 border rounded-md @error('nama_lengkap') border-red-500 @enderror" required>
                             </div>
 
                             <div>
-                                <label class="text-gray-600">Email</label>
-                                <input type="email" name="email" value="{{ old('email', $user->email) }}" 
-                                       class="w-full px-4 py-2 border rounded-md @error('email') border-red-500 @enderror" required>
-                            </div>
-
-                            <div>
                                 <label class="text-gray-600">No HP</label>
-                                <input type="text" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}" 
+                                <input type="text" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
                                        class="w-full px-4 py-2 border rounded-md @error('no_hp') border-red-500 @enderror" required>
                             </div>
 
                             <div>
                                 <label class="text-gray-600">Alamat</label>
-                                <textarea name="alamat" rows="3" 
+                                <textarea name="alamat" rows="3"
                                           class="w-full px-4 py-2 border rounded-md @error('alamat') border-red-500 @enderror" required>{{ old('alamat', $user->alamat) }}</textarea>
                             </div>
 
@@ -96,19 +63,19 @@
                                 <div class="space-y-4">
                                     <div>
                                         <label class="text-gray-600">Password Saat Ini</label>
-                                        <input type="password" name="current_password" 
+                                        <input type="password" name="current_password"
                                                class="w-full px-4 py-2 border rounded-md @error('current_password') border-red-500 @enderror">
                                     </div>
 
                                     <div>
                                         <label class="text-gray-600">Password Baru</label>
-                                        <input type="password" name="new_password" 
+                                        <input type="password" name="new_password"
                                                class="w-full px-4 py-2 border rounded-md @error('new_password') border-red-500 @enderror">
                                     </div>
 
                                     <div>
                                         <label class="text-gray-600">Konfirmasi Password Baru</label>
-                                        <input type="password" name="new_password_confirmation" 
+                                        <input type="password" name="new_password_confirmation"
                                                class="w-full px-4 py-2 border rounded-md">
                                     </div>
                                 </div>
