@@ -4,10 +4,10 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\KatalogController;
-// use App\Http\Controllers\Admin\ProdukController;
 use App\Http\Controllers\Admin\PengelolaanController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CustomerController; // Import the new CustomerController
 use Illuminate\Support\Facades\Route;
 
 // Guest routes (including landing)
@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/detailProduk/{id}', [KatalogController::class, 'detailProduk'])->name('detailProduk');
         Route::get('/profile/edit', [ProfilController::class, 'edit'])->name('profilePelanggan.edit');
         Route::put('/profile/update', [ProfilController::class, 'update'])->name('profilePelanggan.update');
+
         // Booking routes
         Route::get('/booking/{id}', [BookingController::class, 'form'])->name('booking.form');
         Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
@@ -53,7 +54,7 @@ Route::middleware('auth')->group(function () {
     // Admin routes
     Route::prefix('admin')->middleware('admin')->group(function () {
         // Dashboard
-        Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
         // Set dashboard as home for admin
         Route::get('/', function () {
@@ -64,12 +65,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/profile', [App\Http\Controllers\Admin\UserController::class, 'profile'])->name('admin.profile');
         Route::get('/profile/edit', [App\Http\Controllers\Admin\UserController::class, 'editProfile'])->name('admin.profile.edit');
         Route::put('/profile/update', [App\Http\Controllers\Admin\UserController::class, 'updateProfile'])->name('admin.profile.update');
-
-        // Riwayat Admin
-        Route::get('/riwayat', function () {
-            return view('admin.riwayat
-            Admin');
-        })->name('admin.riwayatAdmin');
 
         // Pengelolaan routes
         Route::get('/pengelolaan', [PengelolaanController::class, 'index'])->name('pengelolaan.index');
@@ -86,6 +81,13 @@ Route::middleware('auth')->group(function () {
             Route::put('/{id}/status-booking', [AdminBookingController::class, 'updateStatusBooking'])->name('update-status-booking');
             Route::put('/{id}/status-sewa', [AdminBookingController::class, 'updateStatusSewa'])->name('update-status-sewa');
             Route::delete('/{id}', [AdminBookingController::class, 'destroy'])->name('destroy');
+        });
+
+        // Customer Management Routes (NEW)
+        Route::prefix('customers')->name('admin.customers.')->group(function () {
+            Route::get('/', [CustomerController::class, 'index'])->name('index');
+            Route::get('/{id}', [CustomerController::class, 'show'])->name('show');
+            // Jika ada kebutuhan untuk edit/delete pelanggan di masa depan, bisa ditambahkan di sini
         });
     });
 });

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-8">
+<div class="container mx-auto px-4 py-8"> {{-- Removed redundant layout wrappers --}}
     <div class="mb-6">
         <a href="{{ route('admin.bookings.index') }}" class="inline-flex items-center text-gray-700 hover:text-gray-900">
             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -44,10 +44,10 @@
                 </div>
             </div>
 
-            <!-- Customer Information -->
+            <!-- Informasi Pelanggan -->
             <div class="mb-8">
                 <h2 class="text-lg font-semibold mb-3">Informasi Pelanggan</h2>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-600">Nama</p>
                         <p class="font-medium">{{ $booking->user->nama_lengkap }}</p>
@@ -67,10 +67,10 @@
                 </div>
             </div>
 
-            <!-- Booking Details -->
+            <!-- Detail Peminjaman -->
             <div class="mb-8">
                 <h2 class="text-lg font-semibold mb-3">Detail Peminjaman</h2>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <p class="text-gray-600">Tanggal Booking</p>
                         <p class="font-medium">{{ \Carbon\Carbon::parse($booking->tanggal_booking)->format('d M Y') }}</p>
@@ -82,7 +82,7 @@
                 </div>
             </div>
 
-            <!-- Products -->
+            <!-- Produk yang Dibooking -->
             <div class="mb-8">
                 <h2 class="text-lg font-semibold mb-3">Produk yang Dibooking</h2>
                 <div class="border rounded-lg overflow-hidden">
@@ -100,8 +100,12 @@
                                     <td class="px-6 py-4">
                                         <div class="flex items-center">
                                             @if($detail->produk->gambar)
-                                                <img src="{{ asset('storage/' . $detail->produk->gambar) }}" 
+                                                <img src="{{ asset('storage/' . $detail->produk->gambar) }}"
                                                      alt="{{ $detail->produk->nama_produk }}"
+                                                     class="w-12 h-12 object-cover rounded mr-3">
+                                            @else
+                                                <img src="https://placehold.co/48x48/CCCCCC/333333?text=No+Image"
+                                                     alt="No Image"
                                                      class="w-12 h-12 object-cover rounded mr-3">
                                             @endif
                                             <div>
@@ -131,22 +135,32 @@
             <div class="mb-8">
                 <h2 class="text-lg font-semibold mb-3">Bukti Pembayaran</h2>
                 @if($booking->bukti_pembayaran)
-                    <img src="{{ asset('storage/' . $booking->bukti_pembayaran) }}" 
-                         alt="Bukti Pembayaran"
-                         class="max-w-md rounded shadow-lg">
+                    <div class="flex flex-col items-start space-y-4">
+                        <img src="{{ asset('storage/' . $booking->bukti_pembayaran) }}"
+                             alt="Bukti Pembayaran"
+                             class="max-w-xs md:max-w-md rounded shadow-lg object-contain">
+                        <a href="{{ asset('storage/' . $booking->bukti_pembayaran) }}"
+                           download="{{ 'bukti_pembayaran_' . $booking->id_booking . '.' . pathinfo($booking->bukti_pembayaran, PATHINFO_EXTENSION) }}"
+                           class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Unduh Bukti Pembayaran
+                        </a>
+                    </div>
                 @else
-                    <p class="text-gray-600">Bukti pembayaran belum diupload</p>
+                    <p class="text-gray-600">Bukti pembayaran belum diunggah.</p>
                 @endif
             </div>
 
-            <!-- Actions -->
-            <div class="flex justify-end space-x-4">
+            <!-- Aksi -->
+            <div class="flex flex-wrap justify-end gap-4">
                 @if($booking->isDiproses())
                     <form action="{{ route('admin.bookings.update-status-booking', $booking->id_booking) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status_booking" value="disetujui">
-                        <button type="submit" 
+                        <button type="submit"
                                 class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
                                 onclick="return confirm('Apakah Anda yakin ingin menyetujui booking ini?')">
                             Setujui Booking
@@ -157,7 +171,7 @@
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status_booking" value="ditolak">
-                        <button type="submit" 
+                        <button type="submit"
                                 class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                 onclick="return confirm('Apakah Anda yakin ingin menolak booking ini?')">
                             Tolak Booking
@@ -170,7 +184,7 @@
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status_sewa" value="disewa">
-                        <button type="submit" 
+                        <button type="submit"
                                 class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                                 onclick="return confirm('Konfirmasi barang telah diambil oleh pelanggan?')">
                             Konfirmasi Pengambilan
@@ -183,13 +197,22 @@
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="status_sewa" value="dikembalikan">
-                        <button type="submit" 
+                        <button type="submit"
                                 class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
                                 onclick="return confirm('Konfirmasi barang telah dikembalikan?')">
                             Konfirmasi Pengembalian
                         </button>
                     </form>
                 @endif
+                <form action="{{ route('admin.bookings.destroy', $booking->id_booking) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                            class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                            onclick="return confirm('Apakah Anda yakin ingin menghapus booking ini? Tindakan ini tidak dapat dibatalkan.')">
+                        Hapus Booking
+                    </button>
+                </form>
             </div>
         </div>
     </div>

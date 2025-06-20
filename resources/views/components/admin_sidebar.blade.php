@@ -27,6 +27,14 @@
             </svg>
             <span>Riwayat</span>
         </a>
+        {{-- Pelanggan Link (NEW) --}}
+        <a href="{{ route('admin.customers.index') }}" class="flex items-center text-white px-4 py-4
+            @if(Request::routeIs('admin.customers.*')) bg-primary @else hover:bg-primary/50 @endif">
+            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M17 20v-2c0-.653-.162-1.282-.47-1.857M2 12v-2c0-.653.162-1.282.47-1.857m0 0a2 2 0 11-4 0 2 2 0 014 0zM12 11a2 2 0 100-4 2 2 0 000 4z"></path>
+            </svg>
+            <span>Pelanggan</span>
+        </a>
         {{-- Profile Link --}}
         <a href="{{ route('admin.profile') }}" class="flex items-center text-white px-4 py-4
             @if(Request::routeIs('admin.profile') || Request::routeIs('admin.profile.edit') || Request::routeIs('admin.profile.update')) bg-primary @else hover:bg-primary/50 @endif">

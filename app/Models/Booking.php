@@ -13,37 +13,37 @@ class Booking extends Model
 
     protected $fillable = [
         'user_id',
-        'tanggal_booking',
-        'tanggal_kembali',
+        'tanggal_booking', // Pastikan ini sesuai dengan migrasi
+        'tanggal_kembali', // Pastikan ini sesuai dengan migrasi
         'total_harga',
         'status_booking',
         'status_sewa',
         'bukti_pembayaran'
     ];
 
-    // Status constants for booking
+    // Konstanta status untuk booking
     const STATUS_BOOKING_DIPROSES = 'diproses';
     const STATUS_BOOKING_DISETUJUI = 'disetujui';
     const STATUS_BOOKING_DITOLAK = 'ditolak';
 
-    // Status constants for rental
-    const STATUS_SEWA_BELUM = 'belum_disewa';
-    const STATUS_SEWA_DISEWA = 'disewa';
-    const STATUS_SEWA_KEMBALI = 'dikembalikan';
+    // Konstanta status untuk sewa
+    const STATUS_SEWA_BELUM = 'belum_disewa'; // Status awal saat dibuat oleh pelanggan
+    const STATUS_SEWA_DISEWA = 'disewa'; // Saat barang sedang disewa
+    const STATUS_SEWA_KEMBALI = 'dikembalikan'; // Saat barang sudah dikembalikan
 
-    // Relationship with User
+    // Relasi dengan User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relationship with DetailBooking
+    // Relasi dengan DetailBooking
     public function detailBookings()
     {
         return $this->hasMany(DetailBooking::class, 'id_booking');
     }
 
-    // Helper methods for booking status
+    // Metode helper untuk status booking - disederhanakan
     public function isDiproses()
     {
         return $this->status_booking === self::STATUS_BOOKING_DIPROSES;
@@ -59,7 +59,7 @@ class Booking extends Model
         return $this->status_booking === self::STATUS_BOOKING_DITOLAK;
     }
 
-    // Helper methods for rental status
+    // Metode helper untuk status sewa - disederhanakan
     public function isBelumDisewa()
     {
         return $this->status_sewa === self::STATUS_SEWA_BELUM;
@@ -75,24 +75,29 @@ class Booking extends Model
         return $this->status_sewa === self::STATUS_SEWA_KEMBALI;
     }
 
-    // Get status label with color for display
+    // Mendapatkan label status booking dengan warna untuk tampilan
     public function getStatusBookingLabel()
     {
         return match($this->status_booking) {
             self::STATUS_BOOKING_DIPROSES => ['text' => 'Diproses', 'color' => 'yellow'],
             self::STATUS_BOOKING_DISETUJUI => ['text' => 'Disetujui', 'color' => 'green'],
             self::STATUS_BOOKING_DITOLAK => ['text' => 'Ditolak', 'color' => 'red'],
-            default => ['text' => 'Unknown', 'color' => 'gray'],
+            default => ['text' => 'Unknown Booking Status', 'color' => 'gray'],
         };
     }
 
+    /**
+     * Mendapatkan label status sewa dengan warna untuk tampilan - disederhanakan.
+     *
+     * @return array Array asosiatif yang berisi 'text' dan 'color'.
+     */
     public function getStatusSewaLabel()
     {
         return match($this->status_sewa) {
             self::STATUS_SEWA_BELUM => ['text' => 'Belum Disewa', 'color' => 'gray'],
             self::STATUS_SEWA_DISEWA => ['text' => 'Sedang Disewa', 'color' => 'blue'],
             self::STATUS_SEWA_KEMBALI => ['text' => 'Dikembalikan', 'color' => 'green'],
-            default => ['text' => 'Unknown', 'color' => 'gray'],
+            default => ['text' => 'Unknown Rental Status', 'color' => 'gray'],
         };
     }
 }

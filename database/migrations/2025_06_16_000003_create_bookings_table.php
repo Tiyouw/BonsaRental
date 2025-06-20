@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id('id_booking');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->date('tanggal_mulai');
-            $table->date('tanggal_selesai');
+            // Mengubah nama kolom tanggal agar konsisten dengan model/controller
+            $table->date('tanggal_booking');
+            $table->date('tanggal_kembali');
             $table->decimal('total_harga', 10, 2);
-            $table->enum('status_booking', ['diproses', 'disetujui', 'ditolak'])->default('diproses');
-            $table->enum('status_sewa', ['belum_diambil', 'sedang_disewa', 'selesai'])->default('belum_diambil');
+            // Mengubah tipe kolom dari enum menjadi string dengan panjang yang cukup
+            $table->string('status_booking', 25)->default('diproses'); // Meningkatkan panjang untuk keamanan
+            $table->string('status_sewa', 25)->default('belum_disewa'); // Meningkatkan panjang dan default ke konstanta baru
             $table->string('bukti_pembayaran')->nullable();
             $table->timestamps();
         });
@@ -32,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('bookings');
     }
 };
+

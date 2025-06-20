@@ -1,118 +1,104 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Profile Admin - BonsaRental')
+@section('title', 'Edit Profil Admin - BonsaRental')
 
 @section('content')
-<div class="flex">
-     <x-admin_sidebar />
+<div class="container mx-auto px-4 py-8"> {{-- Removed redundant layout wrappers --}}
+    <div class="mb-6">
+        <a href="{{ route('admin.profile') }}" class="inline-flex items-center text-gray-700 hover:text-gray-900">
+            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d="M15 18l-6-6 6-6"></path>
+            </svg>
+            Kembali ke Profil
+        </a>
+    </div>
 
-    <div class="w-full md:ml-64 px-4 py-8">
-        <div class="container mx-auto">
-            <div class="mb-8">
-                <h1 class="text-2xl font-bold">Edit Profil Admin</h1>
-                <p class="text-gray-600">Perbarui informasi akun Anda</p>
+    <div class="bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6">Edit Profil Admin</h1>
+
+        @if (session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                {{ session('success') }}
             </div>
+        @endif
 
-            @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-                <ul class="list-disc list-inside">
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+                <ul class="list-disc ml-5">
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
             </div>
-            @endif
+        @endif
 
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="max-w-2xl mx-auto">
-                    <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
+        <form action="{{ route('admin.profile.update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-                        <div class="flex flex-col items-center mb-6">
-                            <img src="{{ $user->gambar ? asset('storage/' . $user->gambar) : asset('images/comot.png') }}"
-                                 class="w-24 h-24 rounded-full mb-4">
-                            <input type="file" name="gambar"
-                                   class="block text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:rounded-md file:text-sm file:bg-primary file:text-white hover:file:bg-primary/80" />
-                        </div>
-
-                        <div class="space-y-4">
-                            <div>
-                                <label class="text-gray-600">Nama Lengkap</label>
-                                <input type="text" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
-                                       class="w-full px-4 py-2 border rounded-md @error('nama_lengkap') border-red-500 @enderror" required>
-                            </div>
-
-                            <div>
-                                <label class="text-gray-600">No HP</label>
-                                <input type="text" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
-                                       class="w-full px-4 py-2 border rounded-md @error('no_hp') border-red-500 @enderror" required>
-                            </div>
-
-                            <div>
-                                <label class="text-gray-600">Alamat</label>
-                                <textarea name="alamat" rows="3"
-                                          class="w-full px-4 py-2 border rounded-md @error('alamat') border-red-500 @enderror" required>{{ old('alamat', $user->alamat) }}</textarea>
-                            </div>
-
-                            <!-- Password Section -->
-                            <div class="border-t pt-4">
-                                <h3 class="text-lg font-medium text-gray-900 mb-4">Ubah Password</h3>
-                                <p class="text-sm text-gray-500 mb-4">Kosongkan bagian ini jika tidak ingin mengubah password</p>
-
-                                <div class="space-y-4">
-                                    <div>
-                                        <label class="text-gray-600">Password Saat Ini</label>
-                                        <input type="password" name="current_password"
-                                               class="w-full px-4 py-2 border rounded-md @error('current_password') border-red-500 @enderror">
-                                    </div>
-
-                                    <div>
-                                        <label class="text-gray-600">Password Baru</label>
-                                        <input type="password" name="new_password"
-                                               class="w-full px-4 py-2 border rounded-md @error('new_password') border-red-500 @enderror">
-                                    </div>
-
-                                    <div>
-                                        <label class="text-gray-600">Konfirmasi Password Baru</label>
-                                        <input type="password" name="new_password_confirmation"
-                                               class="w-full px-4 py-2 border rounded-md">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-end gap-4 mt-6">
-                            <a href="{{ route('admin.profile') }}"
-                               class="py-2 px-4 bg-red-600 text-white rounded hover:bg-red-700">
-                                Batal
-                            </a>
-                            <button type="submit" class="py-2 px-4 bg-green-600 text-white rounded hover:bg-green-700">
-                                Simpan
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <div class="mb-4">
+                <label for="username" class="block text-gray-700 text-sm font-bold mb-2">Username:</label>
+                <input type="text" id="username" name="username" value="{{ old('username', $user->username) }}"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline cursor-not-allowed" readonly disabled>
+                <p class="text-xs text-gray-500 mt-1">Username tidak dapat diubah.</p>
             </div>
-        </div>
-    </div>
-</div>
 
-@if (session('success'))
-<div id="successModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-    <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6 text-center">
-        <div class="flex justify-center mb-4">
-            <img src="https://png.pngtree.com/element_our/20200702/ourlarge/pngtree-green-checkmark-error-image_2284668.jpg"
-                 alt="Success"
-                 class="w-20 h-20 object-contain rounded-full">
-        </div>
-        <h2 class="text-xl font-semibold mb-2">Profil berhasil diperbarui!</h2>
-        <p class="text-gray-600 mb-4">{{ session('success') }}</p>
-        <button onclick="window.location.href='{{ route('admin.profile') }}'"
-                class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 w-full transition duration-200">
-            OK
-        </button>
+            <div class="mb-4">
+                <label for="nama_lengkap" class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap:</label>
+                <input type="text" id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap', $user->nama_lengkap) }}"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+                <label for="no_hp" class="block text-gray-700 text-sm font-bold mb-2">Nomor HP:</label>
+                <input type="text" id="no_hp" name="no_hp" value="{{ old('no_hp', $user->no_hp) }}"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+                <label for="alamat" class="block text-gray-700 text-sm font-bold mb-2">Alamat:</label>
+                <textarea id="alamat" name="alamat" rows="3"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ old('alamat', $user->alamat) }}</textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="gambar" class="block text-gray-700 text-sm font-bold mb-2">Gambar Profil (Biarkan kosong jika tidak ingin mengubah):</label>
+                <input type="file" id="gambar" name="gambar"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <p class="text-xs text-gray-500 mt-1">Format: JPG, PNG, JPEG. Maks: 2MB.</p>
+                @if($user->gambar)
+                    <div class="mt-2">
+                        <p class="text-sm text-gray-600">Gambar saat ini:</p>
+                        <img src="{{ asset('storage/' . $user->gambar) }}" alt="Profil Pengguna" class="w-24 h-auto object-cover rounded">
+                    </div>
+                @endif
+            </div>
+
+            <h2 class="text-lg font-semibold mb-3 mt-6">Ubah Password</h2>
+            <div class="mb-4">
+                <label for="current_password" class="block text-gray-700 text-sm font-bold mb-2">Password Saat Ini:</label>
+                <input type="password" id="current_password" name="current_password"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+                <label for="new_password" class="block text-gray-700 text-sm font-bold mb-2">Password Baru:</label>
+                <input type="password" id="new_password" name="new_password"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-6">
+                <label for="new_password_confirmation" class="block text-gray-700 text-sm font-bold mb-2">Konfirmasi Password Baru:</label>
+                <input type="password" id="new_password_confirmation" name="new_password_confirmation"
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Update Profil
+                </button>
+            </div>
+        </form>
     </div>
 </div>
-@endif
 @endsection

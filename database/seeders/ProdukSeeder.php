@@ -2,121 +2,98 @@
 
 namespace Database\Seeders;
 
+use App\Models\Kategori;
 use App\Models\Produk;
 use Illuminate\Database\Seeder;
 
 class ProdukSeeder extends Seeder
 {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run()
     {
-        $products = [
-            // Kamera (id_kategori: 1)
+        // Get existing categories to link products
+        // Retrieve categories by their names to ensure correct linking
+        $kameraCategory = Kategori::where('nama_kategori', 'Kamera')->first();
+        $lensaCategory = Kategori::where('nama_kategori', 'Lensa')->first();
+        $tripodCategory = Kategori::where('nama_kategori', 'Tripod')->first();
+        $filterCategory = Kategori::where('nama_kategori', 'Filter')->first();
+        $flashCategory = Kategori::where('nama_kategori', 'Flash')->first();
+
+
+        // Define products with specific image names based on category
+        $produksData = [
             [
                 'nama_produk' => 'Canon EOS R5',
-                'deskripsi' => 'Kamera mirrorless full-frame 45MP dengan kemampuan video 8K. Cocok untuk fotografi profesional dan videografi.',
+                'deskripsi' => 'Kamera mirrorless full-frame profesional dengan resolusi tinggi.',
                 'harga_per_hari' => 500000,
-                'stock' => 3,
-                'gambar' => 'products/canon-r5.jpg',
-                'id_kategori' => 1
+                'stock' => 5,
+                'id_kategori' => $kameraCategory ? $kameraCategory->id_kategori : null,
+                'gambar' => 'products/camera.jpg', // Assign specific image for camera
             ],
             [
                 'nama_produk' => 'Sony A7 III',
-                'deskripsi' => 'Kamera mirrorless full-frame 24MP dengan performa AF yang sangat baik. Ideal untuk berbagai jenis fotografi.',
+                'deskripsi' => 'Kamera mirrorless serbaguna dengan performa autofokus yang sangat baik.',
                 'harga_per_hari' => 400000,
-                'stock' => 2,
-                'gambar' => 'products/sony-a7iii.jpg',
-                'id_kategori' => 1
+                'stock' => 7,
+                'id_kategori' => $kameraCategory ? $kameraCategory->id_kategori : null,
+                'gambar' => 'products/camera.jpg', // Assign specific image for camera
             ],
             [
-                'nama_produk' => 'Canon 60D',
-                'deskripsi' => 'Kamera DSLR profesional dengan resolusi 18MP',
-                'harga_per_hari' => 150000,
-                'stock' => 5,
-                'gambar' => 'images/canon60d.jpg',
-                'id_kategori' => 1
+                'nama_produk' => 'Nikon D850',
+                'deskripsi' => 'DSLR full-frame beresolusi tinggi untuk fotografer profesional.',
+                'harga_per_hari' => 350000,
+                'stock' => 4,
+                'id_kategori' => $kameraCategory ? $kameraCategory->id_kategori : null,
+                'gambar' => 'products/camera.jpg', // Assign specific image for camera
             ],
-            [
-                'nama_produk' => 'Nikon Z6',
-                'deskripsi' => 'Kamera mirrorless full-frame 24MP dengan stabilisasi dalam body. Sempurna untuk foto dan video.',
-                'harga_per_hari' => 450000,
-                'stock' => 2,
-                'gambar' => 'products/nikon-z6.jpg',
-                'id_kategori' => 1
-            ],
-
-            // Lensa (id_kategori: 2)
             [
                 'nama_produk' => 'Canon RF 24-70mm f/2.8L IS USM',
-                'deskripsi' => 'Lensa zoom standar profesional dengan aperture f/2.8 konstan. Ideal untuk berbagai situasi pemotretan.',
-                'harga_per_hari' => 200000,
-                'stock' => 2,
-                'gambar' => 'products/canon-24-70.jpg',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_produk' => 'Sony FE 85mm f/1.8',
-                'deskripsi' => 'Lensa portrait premium dengan aperture besar. Menghasilkan bokeh yang indah.',
-                'harga_per_hari' => 150000,
+                'deskripsi' => 'Lensa zoom standar serbaguna untuk sistem Canon RF.',
+                'harga_per_hari' => 300000,
                 'stock' => 3,
-                'gambar' => 'products/sony-85mm.jpg',
-                'id_kategori' => 2
+                'id_kategori' => $lensaCategory ? $lensaCategory->id_kategori : null,
+                'gambar' => 'products/lens.jpg', // Assign specific image for canon lens
             ],
             [
-                'nama_produk' => 'Canon RF 50mm f/1.2L USM',
-                'deskripsi' => 'Lensa prime dengan aperture super besar. Sempurna untuk low-light dan portrait.',
+                'nama_produk' => 'Sony FE 85mm f/1.4 GM',
+                'deskripsi' => 'Lensa portrait prima dengan bokeh indah dan ketajaman luar biasa.',
                 'harga_per_hari' => 250000,
-                'stock' => 2,
-                'gambar' => 'products/canon-50mm.jpg',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_produk' => 'Canon 18-55mm Lens',
-                'deskripsi' => 'Lensa kit standar untuk kamera Canon DSLR',
-                'harga_per_hari' => 50000,
-                'stock' => 8,
-                'gambar' => 'images/canon_lens.jpg',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_produk' => 'Nikon Z 14-30mm f/4 S',
-                'deskripsi' => 'Lensa ultra wide-angle yang ringkas. Ideal untuk landscape dan arsitektur.',
-                'harga_per_hari' => 200000,
-                'stock' => 2,
-                'gambar' => 'products/nikon-14-30.jpg',
-                'id_kategori' => 2
-            ],
-
-            // Tripod (id_kategori: 3)
-            [
-                'nama_produk' => 'Tripod Professional',
-                'deskripsi' => 'Tripod kokoh untuk fotografi profesional',
-                'harga_per_hari' => 75000,
-                'stock' => 10,
-                'gambar' => 'images/tripod.jpg',
-                'id_kategori' => 3
-            ],
-
-            // Aksesoris (id_kategori: 4)
-            [
-                'nama_produk' => 'Flash Speedlite',
-                'deskripsi' => 'Flash eksternal untuk pencahayaan tambahan',
-                'harga_per_hari' => 100000,
                 'stock' => 5,
-                'gambar' => 'images/flash.jpg',
-                'id_kategori' => 4
+                'id_kategori' => $lensaCategory ? $lensaCategory->id_kategori : null,
+                'gambar' => 'products/lens.jpg', // Assign specific image for canon lens (assuming common lens image)
             ],
             [
-                'nama_produk' => 'Filter ND',
-                'deskripsi' => 'Filter Neutral Density untuk kontrol eksposur',
+                'nama_produk' => 'Tripod Manfrotto Befree Advanced',
+                'deskripsi' => 'Tripod travel yang ringkas dan stabil.',
                 'harga_per_hari' => 50000,
+                'stock' => 10,
+                'id_kategori' => $tripodCategory ? $tripodCategory->id_kategori : null,
+                'gambar' => 'products/tripod.jpg', // Assign specific image for tripod
+            ],
+            [
+                'nama_produk' => 'Filter ND Variabel Hoya PRO-ND 67mm',
+                'deskripsi' => 'Filter kepadatan netral variabel untuk kontrol eksposur.',
+                'harga_per_hari' => 30000,
                 'stock' => 8,
-                'gambar' => 'images/filter.jpg',
-                'id_kategori' => 4
-            ]
+                'id_kategori' => $filterCategory ? $filterCategory->id_kategori : null,
+                'gambar' => 'products/filter.jpg', // Assign specific image for filter
+            ],
+            [
+                'nama_produk' => 'Godox V860II-C Flash Speedlite',
+                'deskripsi' => 'Flash TTL yang kompatibel dengan kamera Canon.',
+                'harga_per_hari' => 75000,
+                'stock' => 6,
+                'id_kategori' => $flashCategory ? $flashCategory->id_kategori : null,
+                'gambar' => 'products/flash.jpg', // Assign specific image for flash
+            ],
         ];
 
-        foreach ($products as $product) {
-            Produk::create($product);
+        foreach ($produksData as $data) {
+            Produk::create($data);
         }
     }
 }

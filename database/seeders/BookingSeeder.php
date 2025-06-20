@@ -13,15 +13,15 @@ class BookingSeeder extends Seeder
 {
     public function run()
     {
-        // Create sample bookings
+        // Mendefinisikan data booking menggunakan nilai status dan nama kolom yang konsisten
         $bookings = [
             [
-                'user_id' => 2, // Assuming user ID 2 is a regular customer
-                'tanggal_mulai' => Carbon::now()->subDays(5),
-                'tanggal_selesai' => Carbon::now()->subDays(2),
+                'user_id' => 2,
+                'tanggal_booking' => Carbon::now()->subDays(5)->toDateString(), // Nama kolom konsisten
+                'tanggal_kembali' => Carbon::now()->subDays(2)->toDateString(), // Nama kolom konsisten
                 'total_harga' => 1500000,
-                'status_booking' => 'disetujui',
-                'status_sewa' => 'selesai',
+                'status_booking' => Booking::STATUS_BOOKING_DISETUJUI, // Menggunakan konstanta
+                'status_sewa' => Booking::STATUS_SEWA_KEMBALI,       // Menggunakan konstanta
                 'bukti_pembayaran' => 'bukti_pembayaran/sample1.jpg',
                 'created_at' => Carbon::now()->subDays(6),
                 'updated_at' => Carbon::now()->subDays(5),
@@ -35,11 +35,11 @@ class BookingSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'tanggal_mulai' => Carbon::now()->subDays(2),
-                'tanggal_selesai' => Carbon::now()->addDays(1),
+                'tanggal_booking' => Carbon::now()->subDays(2)->toDateString(),
+                'tanggal_kembali' => Carbon::now()->addDays(1)->toDateString(),
                 'total_harga' => 800000,
-                'status_booking' => 'disetujui',
-                'status_sewa' => 'sedang_disewa',
+                'status_booking' => Booking::STATUS_BOOKING_DISETUJUI,
+                'status_sewa' => Booking::STATUS_SEWA_DISEWA,
                 'bukti_pembayaran' => 'bukti_pembayaran/sample2.jpg',
                 'created_at' => Carbon::now()->subDays(3),
                 'updated_at' => Carbon::now()->subDays(2),
@@ -52,12 +52,12 @@ class BookingSeeder extends Seeder
                 ]
             ],
             [
-                'user_id' => 3, // Another customer
-                'tanggal_mulai' => Carbon::now()->addDays(1),
-                'tanggal_selesai' => Carbon::now()->addDays(3),
+                'user_id' => 3,
+                'tanggal_booking' => Carbon::now()->addDays(1)->toDateString(),
+                'tanggal_kembali' => Carbon::now()->addDays(3)->toDateString(),
                 'total_harga' => 600000,
-                'status_booking' => 'diproses',
-                'status_sewa' => 'belum_diambil',
+                'status_booking' => Booking::STATUS_BOOKING_DIPROSES,
+                'status_sewa' => Booking::STATUS_SEWA_BELUM,
                 'bukti_pembayaran' => 'bukti_pembayaran/sample3.jpg',
                 'created_at' => Carbon::now()->subHours(2),
                 'updated_at' => Carbon::now()->subHours(2),
@@ -71,11 +71,11 @@ class BookingSeeder extends Seeder
             ],
             [
                 'user_id' => 3,
-                'tanggal_mulai' => Carbon::now()->subDays(1),
-                'tanggal_selesai' => Carbon::now()->addDays(2),
+                'tanggal_booking' => Carbon::now()->subDays(1)->toDateString(),
+                'tanggal_kembali' => Carbon::now()->addDays(2)->toDateString(),
                 'total_harga' => 450000,
-                'status_booking' => 'ditolak',
-                'status_sewa' => 'belum_diambil',
+                'status_booking' => Booking::STATUS_BOOKING_DITOLAK,
+                'status_sewa' => Booking::STATUS_SEWA_BELUM,
                 'bukti_pembayaran' => 'bukti_pembayaran/sample4.jpg',
                 'created_at' => Carbon::now()->subDays(2),
                 'updated_at' => Carbon::now()->subDays(1),
@@ -84,6 +84,25 @@ class BookingSeeder extends Seeder
                         'id_produk' => 5, // Sony FE 85mm
                         'jumlah' => 1,
                         'subtotal' => 450000
+                    ]
+                ]
+            ],
+            // Contoh booking baru yang dibuat dengan 'diproses' dan 'belum_disewa'
+            [
+                'user_id' => 2,
+                'tanggal_booking' => Carbon::now()->addDays(7)->toDateString(),
+                'tanggal_kembali' => Carbon::now()->addDays(10)->toDateString(),
+                'total_harga' => 750000,
+                'status_booking' => Booking::STATUS_BOOKING_DIPROSES,
+                'status_sewa' => Booking::STATUS_SEWA_BELUM,
+                'bukti_pembayaran' => null, // Tidak ada bukti pembayaran untuk booking baru
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+                'details' => [
+                    [
+                        'id_produk' => 3, // Nikon D850
+                        'jumlah' => 1,
+                        'subtotal' => 750000
                     ]
                 ]
             ]
